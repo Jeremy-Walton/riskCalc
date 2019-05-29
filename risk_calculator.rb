@@ -67,8 +67,11 @@ class RiskCalculator
       puts "Invalid input! Try again \n"
     else
       @rolls.push(rawInput)
-      find_or_add_player(inputString[0]).calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4])
-      find_or_add_player(inputString[1]).calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4])
+      player1 = find_or_add_player(inputString[0])
+      player2 = find_or_add_player(inputString[1])
+
+      player1.calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4])
+      player2.calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4])
     end
   end
 
@@ -76,7 +79,7 @@ class RiskCalculator
     player = @players.find { |player| player.name == name }
 
     if !player || @players.empty?
-      puts 'New player added', ''
+      puts "New player (#{name}) added", ''
       player = Player.new(name)
       @players.push(player)
     end
