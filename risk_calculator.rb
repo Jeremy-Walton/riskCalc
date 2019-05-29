@@ -67,8 +67,8 @@ class RiskCalculator
       puts "Invalid input! Try again \n"
     else
       @rolls.push(rawInput)
-      find_or_add_player(inputString[0]).calculate('w', inputString[2].to_i, inputString[3].to_i, inputString[4])
-      find_or_add_player(inputString[1]).calculate('l', inputString[2].to_i, inputString[3].to_i, inputString[4])
+      find_or_add_player(inputString[0]).calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4])
+      find_or_add_player(inputString[1]).calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4])
     end
   end
 

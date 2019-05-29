@@ -11,71 +11,44 @@ class Player
     @ratio = 0
   end
 
-  def calculate(result, d1, d2, pos)
-    if result == 'w'
-      print @name + ' beat '
-      @wins+=1
-      if pos == 'a'
-        if d1 == 3 && d2 == 1
-          @luckwins += 0.33
-        elsif d1 == 3 && d2 == 2
-          @luckwins += 0.67
-        elsif d1 == 2 && d2 == 1
-          @luckwins += 0.5
-        elsif d1 == 2 && d2 ==2
-          @luckwins += 1
-        elsif d1 == 1 && d2 == 1
-          @luckwins += 1
-        elsif d1 == 1 && d2 == 2
-          @luckwins += 2
-        end
-      elsif pos == 'd'
-        if d1 == 2 && d2 == 1
-          @luckwins += 0.5
-        elsif d1 == 2 && d2 == 2
-          @luckwins += 1
-        elsif d1 == 2 && d2 == 3
-          @luckwins += 1.33
-        elsif d1 == 1 && d2 ==1
-          @luckwins += 1
-        elsif d1 == 1 && d2 == 2
-          @luckwins += 2
-        elsif d1 == 1 && d2 == 3
-          @luckwins += 1.67
-        end
-      end
-    elsif result == 'l'
-      puts @name + " in a #{d1} to #{d2} role. " + @name + random_message
+  def calculate(win, die1, die2, position)
+    if win
+      print @name + ' beat ' # Should be moved to the calculator since the end of this sentance depends on the other player
+      @wins += 1
+    else
+      puts @name + " in a #{die1} to #{die2} role. " + @name + random_message # Should be moved to the calculator since the end of this sentance depends on the other player
       puts ''
       @losses += 1
-      if pos == 'a'
-        if d1 == 3 && d2 == 1
-          @lucklosses += 0.33
-        elsif d1 == 3 && d2 == 2
-          @lucklosses += 0.67
-        elsif d1 == 2 && d2 == 1
-          @lucklosses += 0.5
-        elsif d1 == 2 && d2 ==2
-          @lucklosses += 1
-        elsif d1 == 1 && d2 == 1
-          @lucklosses += 1
-        elsif d1 == 1 && d2 == 2
-          @lucklosses += 2
-        end
-      elsif pos == 'd'
-        if d1 == 2 && d2 == 1
-          @lucklosses += 0.5
-        elsif d1 == 2 && d2 == 2
-          @lucklosses += 1
-        elsif d1 == 2 && d2 == 3
-          @lucklosses += 1.33
-        elsif d1 == 1 && d2 ==1
-          @lucklosses += 1
-        elsif d1 == 1 && d2 == 2
-          @lucklosses += 2
-        elsif d1 == 1 && d2 == 3
-          @lucklosses += 1.67
-        end
+    end
+
+    luck_attribute = win ? @luckwins : @lucklosses
+    if position == 'a'
+      if die1 == 3 && die2 == 1
+        luck_attribute += 0.33
+      elsif die1 == 3 && die2 == 2
+        luck_attribute += 0.67
+      elsif die1 == 2 && die2 == 1
+        luck_attribute += 0.5
+      elsif die1 == 2 && die2 ==2
+        luck_attribute += 1
+      elsif die1 == 1 && die2 == 1
+        luck_attribute += 1
+      elsif die1 == 1 && die2 == 2
+        luck_attribute += 2
+      end
+    else
+      if die1 == 2 && die2 == 1
+        luck_attribute += 0.5
+      elsif die1 == 2 && die2 == 2
+        luck_attribute += 1
+      elsif die1 == 2 && die2 == 3
+        luck_attribute += 1.33
+      elsif die1 == 1 && die2 ==1
+        luck_attribute += 1
+      elsif die1 == 1 && die2 == 2
+        luck_attribute += 2
+      elsif die1 == 1 && die2 == 3
+        luck_attribute += 1.67
       end
     end
 
