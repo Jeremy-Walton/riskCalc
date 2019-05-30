@@ -5,6 +5,7 @@ Risk Game Luck Calculator
 ## Run
 
 To start the script, run `ruby main.rb`
+To start the server (not hooked up to use the script), run `ruby app.rb`
 
 ### Help
 
