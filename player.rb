@@ -21,6 +21,7 @@ class Player
       puts @name + " in a #{die1} to #{die2} role. " + @name + random_message # Should be moved to the calculator since the end of this sentance depends on the other player
       puts ''
       @losses += 1
+
     end
 
     luck_modifier = (die2.to_f / die1.to_f).round(2)
