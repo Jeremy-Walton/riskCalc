@@ -23,8 +23,13 @@ class Player
       @losses += 1
     end
 
-    luck_attribute = win ? @luckwins : @lucklosses
-    luck_attribute += (die2.to_f / die1.to_f).round(2)
+    luck_modifier = (die2.to_f / die1.to_f).round(2)
+
+    if win
+      @luckwins += luck_modifier
+    else
+      @lucklosses += luck_modifier
+    end
 
     @ratio = @wins / @losses.to_f
     @luck = @luckwins / @lucklosses.to_f
