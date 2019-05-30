@@ -12,7 +12,7 @@ class Player
 
   end
 
-  def calculate(win, die1, die2, position)
+  def calculate(win, die1, die2, position, undo)
     # position (a or d) is not used yet
     if win
           print @name + ' beat ' # Should be moved to the calculator since the end of this sentance depends on the other player
