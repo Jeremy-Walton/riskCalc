@@ -8,10 +8,8 @@ class Player
     @wins = 0
     @losses = 0
     @ratio = 0
-
-
   end
-
+  
   def calculate(win, die1, die2, position)
     # position (a or d) is not used yet
     if win

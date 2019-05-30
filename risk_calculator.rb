@@ -1,3 +1,5 @@
+require 'random_name_generator'
+
 class RiskCalculator
   attr_accessor :game_over
 
@@ -5,6 +7,12 @@ class RiskCalculator
     @game_over = false
     @rolls = []
     @players = []
+    @randomNames = []
+    @rng = RandomNameGenerator.new
+  end
+
+  def initialize_names(n)
+    n.times { @randomNames.push(@rng.compose) }
   end
 
   def print_welcome_message
@@ -27,6 +35,7 @@ class RiskCalculator
       To view the current list of players and their luckiness, type 'list'
       To view a list of past rolls, type 'rolls'
       To undo a roll, type 'undo'
+      To view a random scenario just for the heck of it, type 'random'
       To exit script, type 'game over'
     "
   end
@@ -47,7 +56,7 @@ class RiskCalculator
       puts format % ['Player', 'Wins', 'Losses', 'AdjW', 'AdjL', 'Ratio', 'AdjR']
 
       @players.each do |p|
-        puts format % [p.name, p.wins, p.losses, p.luckwins, p.lucklosses, p.ratio.round(2), p.luck.round(2)]
+        puts format % [p.name, p.wins, p.losses, p.luckwins.round(2), p.lucklosses.round(2), p.ratio.round(2), p.luck.round(2)]
       end
       puts divider
       puts ''
@@ -91,6 +100,27 @@ class RiskCalculator
 
       player1.calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4])
       player2.calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4])
+    end
+  end
+
+  def randomScenario
+    @players = []
+    @randomNames = []
+
+     
+    print "How many players would you like to simulate? "
+    playerNum = gets.chomp
+    puts ''
+    print "How many rolls would you like to simulate? "
+    rollsNum = gets.chomp
+    puts ''
+    initialize_names(playerNum.to_i)
+
+    rollsNum.to_i.times do
+      player1 = find_or_add_player(@randomNames.sample)
+      player2 = find_or_add_player(@randomNames.sample)
+      player1.calculate(true, rand(1..3), rand(1..3), 'd')
+      player2.calculate(false, rand(1..3), rand(1..3), 'd')
     end
   end
 

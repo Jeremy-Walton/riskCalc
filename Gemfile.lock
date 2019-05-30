@@ -9,6 +9,7 @@ GEM
     rack-protection (2.0.5)
       rack
     rake (12.3.2)
+    random_name_generator (1.0.3)
     sassc (2.0.1)
       ffi (~> 1.9)
       rake
@@ -31,10 +32,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  random_name_generator
   sassc
   sinatra
   slim
   thin
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

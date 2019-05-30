@@ -14,6 +14,7 @@ while !riskCalc.game_over do
   when 'list'; riskCalc.list_players
   when 'rolls'; riskCalc.display_rolls
   when 'undo'; riskCalc.undo_roll
+  when 'random'; riskCalc.randomScenario
   when 'game over'; riskCalc.end_game
   else;riskCalc.runScenario(string)
   end
