@@ -15,6 +15,8 @@ class RiskCalculator
       if the winner was attacking or defending.
 
       Here is an example: ben josh 3 1 a
+
+      P.S. Don't input ties!
     "
     help
   end
@@ -24,6 +26,7 @@ class RiskCalculator
       To view this list of available commands again, type 'help'
       To view the current list of players and their luckiness, type 'list'
       To view a list of past rolls, type 'rolls'
+      To undo a roll, type 'undo'
       To exit script, type 'game over'
     "
   end
@@ -61,10 +64,26 @@ class RiskCalculator
     puts ''
   end
 
+  def undo_roll
+    if !@rolls.empty?
+      inputString = @rolls.pop().split(' ')
+      player1 = find_or_add_player(inputString[0])
+      player2 = find_or_add_player(inputString[1])
+
+       player1.calculate_undo(true, inputString[2].to_i, inputString[3].to_i, inputString[4])
+      player2.calculate_undo(false, inputString[2].to_i, inputString[3].to_i, inputString[4])
+
+     else
+      puts 'No rolls yet'
+      puts ''
+    end
+  end
+
   def runScenario(rawInput)
     inputString = rawInput.split(' ')
-    if inputString.size() != 5  || inputString[2].to_i > 3 || inputString[3].to_i > 3
-      puts "Invalid input! Try again \n"
+    if inputString.size() != 4  || inputString[2].to_i > 3 || inputString[3].to_i > 3
+      puts 'Invalid input! Try again'
+      puts ''
     else
       @rolls.push(rawInput)
       player1 = find_or_add_player(inputString[0])
