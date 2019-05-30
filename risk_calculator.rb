@@ -15,6 +15,8 @@ class RiskCalculator
       if the winner was attacking or defending.
 
       Here is an example: ben josh 3 1 a
+
+      P.S. Don't input ties!
     "
     help
   end
@@ -65,8 +67,11 @@ class RiskCalculator
   def undo_roll
     if !@rolls.empty?
       inputString = @rolls.pop().split(' ')
-      find_or_add_player(inputString[0]).calculate('w', inputString[2].to_i, inputString[3].to_i, inputString[4], -1) #the -1 will make the calculate method subtract
-      find_or_add_player(inputString[1]).calculate('l', inputString[2].to_i, inputString[3].to_i, inputString[4], -1)
+      player1 = find_or_add_player(inputString[0])
+      player2 = find_or_add_player(inputString[1])
+
+      player1.calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4], true)
+      player2.calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4], true)
     else 
       puts "No rolls yet" 
       puts ""
@@ -75,7 +80,7 @@ class RiskCalculator
 
   def runScenario(rawInput)
     inputString = rawInput.split(' ')
-    if inputString.size() != 5  || inputString[2].to_i > 3 || inputString[3].to_i > 3
+    if inputString.size() != 4  || inputString[2].to_i > 3 || inputString[3].to_i > 3
       puts "Invalid input! Try again"
       puts ""
     else
@@ -83,8 +88,8 @@ class RiskCalculator
       player1 = find_or_add_player(inputString[0])
       player2 = find_or_add_player(inputString[1])
 
-      player1.calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4], 1)
-      player2.calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4], 1)
+      player1.calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4], false)
+      player2.calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4], false)
     end
   end
 
