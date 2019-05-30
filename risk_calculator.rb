@@ -70,8 +70,8 @@ class RiskCalculator
       player1 = find_or_add_player(inputString[0])
       player2 = find_or_add_player(inputString[1])
 
-      player1.calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4], true)
-      player2.calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4], true)
+      player1.calculate_undo(true, inputString[2].to_i, inputString[3].to_i, inputString[4])
+      player2.calculate_undo(false, inputString[2].to_i, inputString[3].to_i, inputString[4])
     else 
       puts "No rolls yet" 
       puts ""
@@ -88,8 +88,8 @@ class RiskCalculator
       player1 = find_or_add_player(inputString[0])
       player2 = find_or_add_player(inputString[1])
 
-      player1.calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4], false)
-      player2.calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4], false)
+      player1.calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4])
+      player2.calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4])
     end
   end
 
