@@ -18,11 +18,9 @@ class RiskCalculator
   def print_welcome_message
     puts "
       Hello, Welcome to your Risk luck calculator! To input a dice role,
-      simply type the two names of the players in the order winner loser
-      followed by the dice ratio followed by either 'd' or 'a' to signify
-      if the winner was attacking or defending.
+      simply type the two names of the players in the order winner loser.
 
-      Here is an example: ben josh 3 1 a
+      Here is an example: ben josh 3 1
 
       P.S. Don't input ties!
     "
@@ -107,7 +105,7 @@ class RiskCalculator
     @players = []
     @randomNames = []
 
-     
+
     print "How many players would you like to simulate? "
     playerNum = gets.chomp
     puts ''
