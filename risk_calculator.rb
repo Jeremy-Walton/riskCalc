@@ -1,7 +1,9 @@
 require 'random_name_generator'
 
+require_relative 'player'
+
 class RiskCalculator
-  attr_accessor :game_over
+  attr_accessor :game_over, :players
 
   def initialize
     @game_over = false
