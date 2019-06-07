@@ -1,6 +1,8 @@
 require 'sinatra/base'
 require 'sass'
 
+require_relative 'risk_calculator'
+
 class SassHandler < Sinatra::Base
   set :views, File.dirname(__FILE__) + '/views/stylesheets'
 
@@ -24,7 +26,11 @@ class MyApp < Sinatra::Base
   use SassHandler
   use JavascriptHandler
 
+  set :calculator, RiskCalculator.new
+
   get '/' do
+    @calculator = settings.calculator
+    @calculator.runScenario('Jeremy Josh 3 1') # This populates the players so you can actually see something
     slim :index
   end
 end
