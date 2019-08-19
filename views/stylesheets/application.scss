@@ -3,19 +3,14 @@
 $black: black;
 $white: white;
 
-.btn-primary {
-  width: 100px;
-  height: 50px;
-}
 .run-scenerio {
   height: 100px; 
-  margin-top: 110%;
-  width: 200%;
-  margin-left: 280%;
+  margin-top: 62px;
+  width: 130px;
+  margin-left: 80px;
 }
 .rolls {
   height: 400px;
-  background: rgb(255, 220, 220);
 }
 .dropdowns {
   margin-top: 20px;
@@ -26,7 +21,6 @@ $white: white;
   height: 50px;
 }
 .choose-player {
-  width: 100px;
   height: 50px;
 }
 .grid-container {
@@ -52,6 +46,12 @@ $white: white;
   height: 300px;
   border-radius: 10px;
 }
+#panel2 {
+  background: rgb(255, 174, 239);
+  margin: 20px;
+  height: 300px;
+  border-radius: 10px;
+}
 .spacer {
   padding-top: 20px;
 }
@@ -61,5 +61,5 @@ $white: white;
 }
 .player-select {
   padding-top: 20px;
-  width: 200%;
+  width: 300px;
 }
