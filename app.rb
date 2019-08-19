@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require('sinatra/reloader')
 require 'sass'
 
 require_relative 'risk_calculator'
@@ -29,7 +30,16 @@ class MyApp < Sinatra::Base
 
   get '/' do
     @calculator = settings.calculator
+
     slim :index
+  end
+
+  post '/' do
+    name = params[:new_name]
+    @calculator = settings.calculator
+    @calculator.find_or_add_player(name)
+
+    redirect '/'
   end
 
   post '/new_player' do
