@@ -1,5 +1,41 @@
-h1 Welcome!
-
-ul
-  - @calculator.players.each do |player|
-    li #{player.name}
+doctype html
+html
+  head
+    title Risk Calculator
+    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+    link rel='stylesheet' type='text/css' href='css/application.css'
+  body
+    script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
+    .container.rolls
+      .row
+        .col-md-8.panel.panel-info#panel1
+          .row
+            .col-md-6
+              form action="/" method="post"
+                .input-group.spacer
+                  input id="n" name="new_name" class="form-control" type="text" placeholder="name"
+                  span class="input-group-btn"
+                    button type="submit" class="btn btn-info add-player" Add Player
+              form action="/" method="post"
+                .dropdowns.input-group.spacer
+                  select class="form-control btn-primary" value="Winner"
+                    option.hidden value="" Winner
+                    - @calculator.players.each do |person|
+                      option = person.name
+                  span class="input-group-btn"
+                    button type="button" onclick="-@calculator.find_or_add_player('Joshh')" class="btn btn-info choose-player" 1
+                    button type="button" onclick="Player.new(new_name)" class="btn btn-info choose-player" 2
+                    button type="button" onclick="Player.new(new_name)" class="btn btn-info choose-player" 3
+                .dropdowns.input-group.spacer
+                  select class="form-control btn-primary"
+                    option.hidden Loser
+                    - @calculator.players.each do |person|
+                      option = person.name
+                  span class="input-group-btn"
+                    button type="button" onclick="Player.new(new_name)" class="btn btn-info choose-player" 1
+                    button type="button" onclick="Player.new(new_name)" class="btn btn-info choose-player" 2
+                    button type="button" onclick="Player.new(new_name)" class="btn btn-info choose-player" 3
+            .col-md-2
+              span 
+                button type="button" onclick="@calculator.runScenerio()" class="btn btn-success run-scenerio" Process Roll

@@ -2,11 +2,52 @@
 
 $black: black;
 $white: white;
-
+.btn-primary {
+  width: 100px;
+  height: 50px;
+}
+.run-scenerio {
+  height: 100px; 
+  margin-top: 110%;
+  width: 150%;
+}
+.rolls {
+  height: 400px;
+  background: rgb(255, 220, 220);
+}
+.dropdowns {
+  margin-top: 20px;
+}
+.choose-player {
+  width: 70px;
+  height: 50px;
+}
 .grid-container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 60px 1fr 40px;
   grid-template-areas: "." "." ".";
   height: 100vh;
+}
+.header, .footer {
+  display: flex;
+  align-items: center;
+  background: $black;
+  color: $white;
+  padding: 10px;
+}
+.footer {
+  font-size: 0.8rem;
+}
+.panel {
+  background: rgb(174, 174, 255);
+  margin: 20px;
+  height: 300px;
+  border-radius: 10px;
+}
+.spacer {
+  padding-top: 20px;
+}
+.add-player {
+  padding-left: 20px;
 }
