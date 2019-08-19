@@ -2,6 +2,7 @@
 
 $black: black;
 $white: white;
+
 .btn-primary {
   width: 100px;
   height: 50px;
@@ -9,7 +10,8 @@ $white: white;
 .run-scenerio {
   height: 100px; 
   margin-top: 110%;
-  width: 150%;
+  width: 200%;
+  margin-left: 280%;
 }
 .rolls {
   height: 400px;
@@ -17,9 +19,14 @@ $white: white;
 }
 .dropdowns {
   margin-top: 20px;
+  margin-left: 20px;
+}
+.number {
+  width: 100px;
+  height: 50px;
 }
 .choose-player {
-  width: 70px;
+  width: 100px;
   height: 50px;
 }
 .grid-container {
@@ -50,4 +57,9 @@ $white: white;
 }
 .add-player {
   padding-left: 20px;
+  padding-right: 20px;
+}
+.player-select {
+  padding-top: 20px;
+  width: 200%;
 }
