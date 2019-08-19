@@ -72,25 +72,3 @@ body {
 .table tr:nth-child(odd) {
   background-color: $table-rows;
 }
-.header, .footer {
-  display: flex;
-  align-items: center;
-  background: $black;
-  color: $white;
-  padding: 10px;
-}
-.footer {
-  font-size: 0.8rem;
-}
-.panel {
-  background: rgb(174, 174, 255);
-  margin: 20px;
-  height: 300px;
-  border-radius: 10px;
-}
-.spacer {
-  padding-top: 20px;
-}
-.add-player {
-  padding-left: 20px;
-}
