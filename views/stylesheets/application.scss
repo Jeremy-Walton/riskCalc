@@ -55,6 +55,11 @@ $white: white;
 .spacer {
   padding-top: 20px;
 }
+.stats {
+  text-align: center;
+  font-family: Calibri, 'Trebuchet MS', sans-serif;
+  padding-top: 20px;
+}
 .add-player {
   padding-left: 20px;
   padding-right: 20px;
@@ -62,4 +67,58 @@ $white: white;
 .player-select {
   padding-top: 20px;
   width: 300px;
+}
+*{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+body{
+    font-family: Helvetica;
+    -webkit-font-smoothing: antialiased;
+    background: rgba( 71, 147, 227, 1);
+}
+h2{
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+.table-wrapper{
+    margin: 10px 70px 70px;
+    background: rgb(0, 225, 255);
+    box-shadow: 0px 35px 50px rgba(35, 0, 191, 0.742);
+    border-radius: 15px;
+}
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: rgb(71, 147, 227);
+}
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+.fl-table td {
+    border-right: 1px solid #7370f0;
+    font-size: 12px;
+}
+.fl-table thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #455c47;
+}
+.fl-table tr:nth-child(even) {
+    background: rgb(139, 234, 255);
 }
