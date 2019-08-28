@@ -1,72 +1,63 @@
-doctype html
-html
-  head
-    title Risk Calculator
-    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
-    link rel='stylesheet' type='text/css' href='css/application.css'
-  body
-    script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-    script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
-    javascript:
-        $("button").click(function(){
-          $("button").removeClass("active");
-          $(this).addClass("active");
-        });   
-    .container.rolls
-      .row
-        .col-md-6
-          .panel.panel-info#panel1
-            form action="/new_player" method="post" class="add-player"
-              .input-group.spacer
-                input id="n" name="new_name" class="form-control" type="text" placeholder="name"
-                span class="input-group-btn"
-                  button type="submit" class="btn btn-info add-player" Add Player
-            .row
-              form action="/roll" method="post"
-                .col-md-6
-                  .dropdowns.input-group.player-select
-                    select class="form-control btn-primary choose-player" name="winner"
-                      option.hidden value="" Winner
+.container
+  .row
+    .col-md-6
+      .card.panel.mt-4
+        .card-body
+          form action='/new_player' method='post'
+            .form-row.align-items-center.justify-content-center
+              .col-auto
+                input.form-control type='text' name='new_name' placeholder='Name'
+              .col-auto
+                button.btn.btn-info type='submit' Add Player
+
+          form action='/roll' method='post'
+            .row.mt-4
+              .col-md-9
+                .row
+                  .col-md-8
+                    select.form-control.player-dropdown name='winner'
+                      option.hidden value='' Winner
                       - @calculator.players.each do |person|
                         option = person.name
-                    span class="input-group-btn number"
-                      select class="form-control btn-info number" name="player_one_num_dice"
-                        option 1
-                        option 2
-                        option 3
-                  .dropdowns.input-group.player-select
-                    select class="form-control btn-primary choose-player" name="loser"
-                      option.hidden value="" Loser
+                  .col-md-3
+                    select.form-control.number-dropdown name='roll_one'
+                      option 1
+                      option 2
+                      option 3
+                .row.mt-1
+                  .col-md-8
+                    select.form-control.player-dropdown name='loser'
+                      option.hidden value='' Loser
                       - @calculator.players.each do |person|
-                          option = person.name
-                    span class="input-group-btn number"
-                      select class="form-control btn-info number" name="player_two_num_dice"
-                        option 1
-                        option 2
-                        option 3
-                .col-md-3
-                  button type="submit" class="btn btn-success run-scenerio" Proccess Roll
-        .col-md-6
-          .panel.panel-info#panel2
-        .col-md-12
-          .table-wrapper
-            h1.stats Stats
-            table.fl-table
-              tr
-                th colspan="4" Player
-                th colspan="3" Wins
-                th colspan="3" Losses
-                th colspan="2" Adjusted Wins
-                th colspan="2" Adjusted Losses
-                th colspan="2" Ratio
-                th colspan="6" Adjusted Ratio
-              - @calculator.players.each do |p|
-                tr
-                  td colspan="4" =p.name
-                  td colspan="3" =p.wins
-                  td colspan="3" =p.losses
-                  td colspan="2" =p.luckwins.round(2)
-                  td colspan="2" =p.lucklosses.round(2)
-                  td colspan="2" =p.ratio.round(2)
-                  td colspan="2" =p.luck.round(2)
-            
+                        option = person.name
+                  .col-md-3
+                    select.form-control.number-dropdown name='roll_two'
+                      option 1
+                      option 2
+                      option 3
+              .row.col-md-3.justify-content-center
+                button.btn.btn-success type="submit" Proccess Roll
+  .row
+    .col-md-12
+      .mt-4.table-wrapper
+        h1.stats.text-center.p-2.m-0 Stats
+        table.table
+          thead
+            tr.text-center.thead-primary
+              th Player
+              th Wins
+              th Losses
+              th Adjusted Wins
+              th Adjusted Losses
+              th Ratio
+              th Adjusted Ratio
+          tbody
+            - @calculator.players.each do |p|
+              tr.text-center
+                td = p.name
+                td = p.wins
+                td = p.losses
+                td = p.luckwins.round(2)
+                td = p.lucklosses.round(2)
+                td = p.ratio.round(2)
+                td = p.luck.round(2)
