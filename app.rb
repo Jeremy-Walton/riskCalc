@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require('sinatra/reloader')
+# require 'sinatra/reloader'
 require 'sass'
 
 require_relative 'risk_calculator'
@@ -43,8 +43,8 @@ class MyApp < Sinatra::Base
   end
 
   post '/roll' do
-    @num1 = params[:player_one_num_dice]
-    @num2 = params[:player_two_num_dice]
+    @num1 = params[:roll_one]
+    @num2 = params[:roll_two]
     @winner = params[:winner]
     @loser = params[:loser]
     @rawInput = @winner + " " + @loser + " " + @num1 + " " + @num2
