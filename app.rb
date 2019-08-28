@@ -51,19 +51,6 @@ class MyApp < Sinatra::Base
   end
 
   post '/roll' do
-    @num1 = params[:player_one_num_dice]
-    @num2 = params[:player_two_num_dice]
-    @winner = params[:winner]
-    @loser = params[:loser]
-    @rawInput = @winner + " " + @loser + " " + @num1 + " " + @num2
-    puts @rawInput
-    @calculator = settings.calculator
-    @calculator.runScenario(@rawInput)
-    slim :index
-  end
-end
-
-  post '/roll' do
     raw_input = "#{params[:winner]} #{params[:loser]} #{params[:roll_one]} #{params[:roll_two]}"
     @calculator = settings.calculator
     @calculator.runScenario(raw_input)
