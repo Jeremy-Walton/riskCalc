@@ -38,9 +38,6 @@ html
                     select class="form-control btn-primary choose-player" name="loser"
                       option.hidden value="" Loser
                       - @calculator.players.each do |person|
-                        -if person.name == params[:winner]
-                          option.hidden = person.name
-                        -else
                           option = person.name
                     span class="input-group-btn number"
                       select class="form-control btn-info number" name="player_two_num_dice"
