@@ -1,5 +1,4 @@
 require 'sinatra/base'
-# require 'sinatra/reloader'
 require 'sass'
 
 require_relative 'risk_calculator'
@@ -39,7 +38,7 @@ class MyApp < Sinatra::Base
     name = params[:new_name]
     @calculator = settings.calculator
     @calculator.find_or_add_player(name)
-    slim :index
+    redirect '/'
   end
 
   post '/roll' do
@@ -47,11 +46,11 @@ class MyApp < Sinatra::Base
     @num2 = params[:roll_two]
     @winner = params[:winner]
     @loser = params[:loser]
-    @rawInput = @winner + " " + @loser + " " + @num1 + " " + @num2
+    @rawInput = "#{@winner} #{@loser} #{@num1} #{@num2}"
     puts @rawInput
     @calculator = settings.calculator
     @calculator.runScenario(@rawInput)
-    slim :index
+    redirect '/'
   end
 end
 

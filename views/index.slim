@@ -16,7 +16,7 @@
                 .row
                   .col-md-8
                     select.form-control.player-dropdown name='winner'
-                      option.hidden value='' Winner
+                      option disabled=true selected=true value='' Winner
                       - @calculator.players.each do |person|
                         option = person.name
                   .col-md-3
