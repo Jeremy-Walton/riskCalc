@@ -9,7 +9,6 @@
                 input.form-control type='text' name='new_name' placeholder='Name'
               .col-auto
                 button.btn.btn-info type='submit' Add Player
-
           form action='/roll' method='post'
             .row.mt-4
               .col-md-9
@@ -37,6 +36,17 @@
                       option 3
               .row.col-md-3.justify-content-center
                 button.btn.btn-success type="submit" Proccess Roll
+    .col-md-6
+      .panel.panel-info#panel1
+        h1.rolls-title Rolls
+        table.fl-table
+          tr
+            .list-rolls 
+              - @rolls.each do |roll|
+                p = roll
+              tr 
+                form action="/undo-roll" method="post"
+                  button type="submit" class="btn btn-warning undo-roll" Undo Roll
   .row
     .col-md-12
       .mt-4.table-wrapper

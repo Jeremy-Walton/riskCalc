@@ -72,3 +72,18 @@ body {
 .table tr:nth-child(odd) {
   background-color: $table-rows;
 }
+
+.list-rolls {
+  height:150px;
+  width: 100%;
+  overflow:auto;
+  background-color:rgb(158, 89, 255);
+  color:white;
+  scrollbar-base-color:gold;
+  font-family:sans-serif;
+  padding:10px;
+}
+.undo-roll {
+  height: 50px; 
+  width: 100%;
+}

@@ -1,5 +1,4 @@
 require 'sinatra/base'
-# require 'sinatra/reloader'
 require 'sass'
 
 require_relative 'risk_calculator'
@@ -37,14 +36,6 @@ class MyApp < Sinatra::Base
   post '/new_player' do
     name = params[:new_name]
     @calculator = settings.calculator
-    @calculator.find_or_add_player(name)
-
-    redirect '/'
-  end
-
-  post '/new_player' do
-    name = params[:new_name]
-    @calculator = settings.calculator
     @calculator.find_or_add_player(name) if name && name != ''
 
     redirect '/'
@@ -53,11 +44,19 @@ class MyApp < Sinatra::Base
   post '/roll' do
     raw_input = "#{params[:winner]} #{params[:loser]} #{params[:roll_one]} #{params[:roll_two]}"
     @calculator = settings.calculator
+
     @calculator.runScenario(raw_input)
     puts raw_input
 
     redirect '/'
   end
+
+  post '/undo-roll' do
+    @calculator = settings.calculator
+    @calculator.undo_roll
+    slim :index
+  end
+
 end
 
 MyApp.run! port: 4567 if $PROGRAM_NAME == __FILE__

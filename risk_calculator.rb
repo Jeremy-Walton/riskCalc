@@ -73,6 +73,10 @@ class RiskCalculator
     puts ''
   end
 
+  def rolls
+   @rolls
+  end
+
   def undo_roll
     if !@rolls.empty?
       inputString = @rolls.pop().split(' ')
