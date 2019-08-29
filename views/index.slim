@@ -50,7 +50,7 @@
           table.fl-table
             tr
               .list-rolls
-                - @calculator.rolls.each do |roll|
+                - @calculator.log.each do |roll|
                   p = roll
                 tr 
                   form action="/undo-roll" method="post"

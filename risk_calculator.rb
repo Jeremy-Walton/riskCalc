@@ -9,6 +9,7 @@ class RiskCalculator
     @rolls = []
     @players = []
     @randomNames = []
+    @log_messages = []
     @rng = RandomNameGenerator.new
   end
 
@@ -28,7 +29,7 @@ class RiskCalculator
 
       player1.calculate_undo(true, inputString[2].to_i, inputString[3].to_i, inputString[4])
       player2.calculate_undo(false, inputString[2].to_i, inputString[3].to_i, inputString[4])
-
+      log_message_undo(player1, player2, inputString[2].to_i, inputString[3].to_i)
      else
       puts 'No rolls yet'
       puts ''
@@ -47,7 +48,20 @@ class RiskCalculator
 
       player1.calculate(true, inputString[2].to_i, inputString[3].to_i, inputString[4])
       player2.calculate(false, inputString[2].to_i, inputString[3].to_i, inputString[4])
+      log_message(player1, player2, inputString[2].to_i, inputString[3].to_i )
     end
+  end
+
+  def log_message(player1, player2, num1, num2)
+    @log_messages.push("#{player1.name} beat #{player2.name} in a #{num1} to #{num2} roll.")
+  end
+
+  def log_message_undo(player1, player2, num1, num2)
+    @log_messages.pop
+  end
+
+  def log
+    @log_messages
   end
 
   def randomScenario(player_num, roll_num)

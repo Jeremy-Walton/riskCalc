@@ -13,11 +13,8 @@ class Player
   def calculate(win, die1, die2, position)
     # position (a or d) is not used yet
     if win
-      print "#{@name} beat " # Should be moved to the calculator since the end of this sentance depends on the other player
       @wins += 1
     else
-      puts "#{@name} in a #{die1} to #{die2} roll. #{@name} #{random_message}" # Should be moved to the calculator since the end of this sentance depends on the other player
-      puts ''
       @losses += 1
     end
 
@@ -27,25 +24,13 @@ class Player
 
   def calculate_undo(win, die1, die2, position)
     if win
-      print "The roll where #{@name} beat "
       @wins -= 1
     else
-      puts "#{@name} in a #{die1} to #{die2} roll has been undone."
-      puts ''
       @losses-=1
     end
 
     luck_modifier = (die2.to_f / die1.to_f).round(2)
     update_values(win, -luck_modifier, undo: true)
-  end
-
-  def random_message
-    case rand(1..4)
-    when 1; 'needs to get better.'
-    when 2; 'should get more luck.'
-    when 3; 'should just give up at this point.'
-    else; 'is pretty unlucky'
-    end
   end
 
   def update_values(win, value, undo: false)
