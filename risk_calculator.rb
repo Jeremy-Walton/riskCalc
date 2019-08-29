@@ -73,6 +73,10 @@ class RiskCalculator
     puts ''
   end
 
+  def rolls
+   @rolls
+  end
+
   def undo_roll
     if !@rolls.empty?
       inputString = @rolls.pop().split(' ')
@@ -103,20 +107,12 @@ class RiskCalculator
     end
   end
 
-  def randomScenario
+  def randomScenario(player_num, roll_num)
     @players = []
     @randomNames = []
-
-
-    print "How many players would you like to simulate? "
-    playerNum = gets.chomp
-    puts ''
-    print "How many rolls would you like to simulate? "
-    rollsNum = gets.chomp
-    puts ''
-    initialize_names(playerNum.to_i)
-
-    rollsNum.to_i.times do
+    initialize_names(player_num.to_i)
+    
+    roll_num.times do
       player1 = find_or_add_player(@randomNames.sample)
       player2 = find_or_add_player(@randomNames.sample)
       player1.calculate(true, rand(1..3), rand(1..3), 'd')
@@ -134,5 +130,9 @@ class RiskCalculator
     end
 
     return player
+  end
+
+  def sort_players
+    @players.sort_by(&:luck).reverse!
   end
 end

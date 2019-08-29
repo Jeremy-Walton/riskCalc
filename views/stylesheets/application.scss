@@ -7,6 +7,7 @@ $input: #007bff;
 $info: #17a2b8;
 $stats: #00e1ff;
 $table-rows: #8beaff;
+$purple: #9e59ff;
 
 body {
   font-family: Helvetica;
@@ -30,6 +31,7 @@ body {
 .panel {
   background-color: #aeaeff;
   border-radius: 10px;
+  height: 280px;
 }
 
 .player-dropdown, .player-dropdown:focus {
@@ -71,4 +73,17 @@ body {
 
 .table tr:nth-child(odd) {
   background-color: $table-rows;
+}
+
+.list-rolls {
+  background-color: $purple;
+  color: $white;
+  padding: 10px;
+  overflow: scroll;
+  height: 150px;
+}
+
+.undo-roll {
+  height: 50px; 
+  width: 100%;
 }

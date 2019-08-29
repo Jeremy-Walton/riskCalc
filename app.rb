@@ -29,6 +29,7 @@ class MyApp < Sinatra::Base
 
   get '/' do
     @calculator = settings.calculator
+
     slim :index
   end
 
@@ -43,11 +44,27 @@ class MyApp < Sinatra::Base
   post '/roll' do
     raw_input = "#{params[:winner]} #{params[:loser]} #{params[:roll_one]} #{params[:roll_two]}"
     @calculator = settings.calculator
+
     @calculator.runScenario(raw_input)
     puts raw_input
 
     redirect '/'
   end
+
+  post '/undo-roll' do
+    @calculator = settings.calculator
+    @calculator.undo_roll
+
+    redirect '/'
+  end
+
+  post '/random' do
+    @calculator = settings.calculator
+    @calculator.randomScenario(4, 200)
+
+    redirect '/'
+  end
+
 end
 
 MyApp.run! port: 4567 if $PROGRAM_NAME == __FILE__

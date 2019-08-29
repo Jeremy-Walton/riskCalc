@@ -3,13 +3,13 @@
     .col-md-6
       .card.panel.mt-4
         .card-body
+          h5.card-title.text-center Roll
           form action='/new_player' method='post'
             .form-row.align-items-center.justify-content-center
               .col-auto
                 input.form-control type='text' name='new_name' placeholder='Name'
               .col-auto
                 button.btn.btn-info type='submit' Add Player
-
           form action='/roll' method='post'
             .row.mt-4
               .col-md-9
@@ -37,6 +37,24 @@
                       option 3
               .row.col-md-3.justify-content-center
                 button.btn.btn-success type="submit" Proccess Roll
+          form action="/random" method="post"
+            button.btn.btn-secondary.undo-roll.mt-3 Randomly generate game just because
+            javascript:
+              $('.undo-roll').on('click', function() {
+                return confirm('Are you sure?');
+              });
+    .col-md-6
+      .card.panel.mt-4
+        .card-body
+          h5.card-title.text-center Log
+          table.fl-table
+            tr
+              .list-rolls
+                - @calculator.rolls.each do |roll|
+                  p = roll
+                tr 
+                  form action="/undo-roll" method="post"
+                    button type="submit" class="btn btn-warning undo-roll" Undo Roll
   .row
     .col-md-12
       .mt-4.table-wrapper
@@ -52,7 +70,7 @@
               th Ratio
               th Adjusted Ratio
           tbody
-            - @calculator.players.each do |p|
+            - @calculator.sort_players.each do |p|
               tr.text-center
                 td = p.name
                 td = p.wins
