@@ -1,6 +1,7 @@
 require 'random_name_generator'
 require_relative 'player'
 
+# Risk Calculator
 class RiskCalculator
   attr_accessor :game_over, :players
 
@@ -27,19 +28,17 @@ class RiskCalculator
   end
 
   def calculate(player1, player2, die1, die2)
-    luck_modifier1 = (die2.to_f / die1.to_f).round(2)
-    player1.update_values(true, luck_modifier1, false)
+    luck = (die2.to_f / die1.to_f).round(2)
 
-    luck_modifier2 = (die2.to_f / die1.to_f).round(2)
-    player2.update_values(false, luck_modifier2, false)
+    player1.update_win(luck: luck)
+    player2.update_loss(luck: luck)
   end
 
   def calculate_undo(player1, player2, die1, die2)
-    luck_modifier1 = (die2.to_f / die1.to_f).round(2)
-    player1.update_values(true, luck_modifier1, true)
+    luck = (die2.to_f / die1.to_f).round(2)
 
-    luck_modifier2 = (die2.to_f / die1.to_f).round(2)
-    player2.update_values(false, luck_modifier2, true)
+    player1.update_win(luck: luck, undo: true)
+    player2.update_loss(luck: luck, undo: true)
   end
 
   def undo_roll
