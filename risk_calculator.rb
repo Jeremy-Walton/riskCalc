@@ -9,16 +9,16 @@ class RiskCalculator
     @game_over = false
     @rolls = []
     @players = []
-    @randomNames = []
+    @random_names = []
     @log_messages = []
     @rng = RandomNameGenerator.new
   end
 
   def initialize_names(amount)
-    amount.times { @randomNames.push(@rng.compose) }
+    amount.times { @random_names.push(@rng.compose) }
   end
 
-  def runScenario(player1_name, player2_name, die1, die2)
+  def run_scenario(player1_name, player2_name, die1, die2)
     @rolls.push([player1_name, player2_name, die1, die2])
     player1 = find_or_add_player(player1_name)
     player2 = find_or_add_player(player2_name)
@@ -78,12 +78,12 @@ class RiskCalculator
 
   def randomScenario(player_num, roll_num)
     @players = []
-    @randomNames = []
+    @random_names = []
     initialize_names(player_num.to_i)
 
     roll_num.times do
-      player1 = find_or_add_player(@randomNames.sample)
-      player2 = find_or_add_player(@randomNames.sample)
+      player1 = find_or_add_player(@random_names.sample)
+      player2 = find_or_add_player(@random_names.sample)
       calculate(player1, player2, rand(1..3), rand(1..3))
     end
   end
