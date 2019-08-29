@@ -1,5 +1,4 @@
 require 'random_name_generator'
-
 require_relative 'player'
 
 class RiskCalculator
@@ -15,62 +14,6 @@ class RiskCalculator
 
   def initialize_names(n)
     n.times { @randomNames.push(@rng.compose) }
-  end
-
-  def print_welcome_message
-    puts "
-      Hello, Welcome to your Risk luck calculator! To input a dice role,
-      simply type the two names of the players in the order winner loser.
-
-      Here is an example: ben josh 3 1
-
-      P.S. Don't input ties!
-    "
-    help
-  end
-
-  def help
-    puts "
-      To view this list of available commands again, type 'help'
-      To view the current list of players and their luckiness, type 'list'
-      To view a list of past rolls, type 'rolls'
-      To undo a roll, type 'undo'
-      To view a random scenario just for the heck of it, type 'random'
-      To exit script, type 'game over'
-    "
-  end
-
-  def end_game
-    @game_over = true
-    puts 'Thanks for playing!'
-  end
-
-  def list_players
-    divider = '-----------------------------------Players-------------------------------------'
-
-    if @players.empty?
-      puts 'The list is empty', ''
-    else
-      puts divider
-      format = '%-15s %-10s %-10s %-10s %-10s %-10s %-10s'
-      puts format % ['Player', 'Wins', 'Losses', 'AdjW', 'AdjL', 'Ratio', 'AdjR']
-
-      @players.each do |p|
-        puts format % [p.name, p.wins, p.losses, p.luckwins.round(2), p.lucklosses.round(2), p.ratio.round(2), p.luck.round(2)]
-      end
-      puts divider
-      puts ''
-    end
-  end
-
-  def display_rolls
-    return puts 'No rolls yet', '' if @rolls.empty?
-
-    divider = '------------------Rolls-------------------'
-    puts divider
-    puts @rolls
-    puts divider
-    puts ''
   end
 
   def rolls
