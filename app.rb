@@ -21,7 +21,6 @@ class JavascriptHandler < Sinatra::Base
   end
 end
 
-
 class MyApp < Sinatra::Base
   use SassHandler
   use JavascriptHandler
@@ -36,25 +35,19 @@ class MyApp < Sinatra::Base
   post '/new_player' do
     name = params[:new_name]
     @calculator = settings.calculator
-    @calculator.find_or_add_player(name)
+    @calculator.find_or_add_player(name) if name && name != ''
 
     redirect '/'
   end
 
   post '/roll' do
-    @num1 = params[:roll_one]
-    @num2 = params[:roll_two]
-    @winner = params[:winner]
-    @loser = params[:loser]
-    @rawInput = "#{@winner} #{@loser} #{@num1} #{@num2}"
-    puts @rawInput
+    raw_input = "#{params[:winner]} #{params[:loser]} #{params[:roll_one]} #{params[:roll_two]}"
     @calculator = settings.calculator
-    @calculator.runScenario(@rawInput)
+    @calculator.runScenario(raw_input)
+    puts raw_input
 
     redirect '/'
   end
 end
 
-if __FILE__ == $0
-  MyApp.run! port: 4567
-end
+MyApp.run! port: 4567 if $PROGRAM_NAME == __FILE__

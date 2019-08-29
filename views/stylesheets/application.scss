@@ -32,13 +32,13 @@ body {
   border-radius: 10px;
 }
 
-.player-dropdown {
+.player-dropdown, .player-dropdown:focus {
   background-color: $input;
   border-color: $input;
   color: $white;
 }
 
-.number-dropdown {
+.number-dropdown, .number-dropdown:focus {
   background-color: $info;
   border-color: $info;
   color: $white;
