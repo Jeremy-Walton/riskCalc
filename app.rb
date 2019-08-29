@@ -42,11 +42,8 @@ class MyApp < Sinatra::Base
   end
 
   post '/roll' do
-    raw_input = "#{params[:winner]} #{params[:loser]} #{params[:roll_one]} #{params[:roll_two]}"
     @calculator = settings.calculator
-
-    @calculator.runScenario(raw_input)
-    puts raw_input
+    @calculator.runScenario(params[:winner], params[:loser], params[:roll_one], params[:roll_two])
 
     redirect '/'
   end

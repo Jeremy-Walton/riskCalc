@@ -27,7 +27,7 @@
                 .row.mt-1
                   .col-md-8
                     select.form-control.player-dropdown name='loser'
-                      option.hidden value='' Loser
+                      option disabled=true selected=true value='' Loser
                       - @calculator.players.each do |person|
                         option = person.name
                   .col-md-3
@@ -50,7 +50,7 @@
           table.fl-table
             tr
               .list-rolls
-                - @calculator.log.each do |roll|
+                - @calculator.logs.each do |roll|
                   p = roll
                 tr 
                   form action="/undo-roll" method="post"
