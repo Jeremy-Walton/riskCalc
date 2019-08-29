@@ -50,8 +50,8 @@
           table.fl-table
             tr
               .list-rolls
-                - @calculator.logs.each do |roll|
-                  p = roll
+                - @calculator.logs.each do |log|
+                  p = log
                 tr
                   form action="/undo-roll" method="post"
                     button type="submit" class="btn btn-warning undo-roll" Undo Roll

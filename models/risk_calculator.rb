@@ -23,10 +23,11 @@ class RiskCalculator
     player1 = find_or_add_player(player1_name)
     player2 = find_or_add_player(player2_name)
 
-    @rolls.push(Roll.new(player1, player2, die1, die2))
+    new_roll = Roll.new(player1, player2, die1, die2)
+    @rolls.push(new_roll)
+    log_message(new_roll)
 
     calculate(player1, player2, die1, die2)
-    log_message(roll)
   end
 
   def calculate(player1, player2, die1, die2)
