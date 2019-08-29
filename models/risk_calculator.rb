@@ -20,9 +20,10 @@ class RiskCalculator
   end
 
   def run_scenario(player1_name, player2_name, die1, die2)
-    @rolls.push(Roll.new(player1_name, player2_name, die1, die2))
     player1 = find_or_add_player(player1_name)
     player2 = find_or_add_player(player2_name)
+
+    @rolls.push(Roll.new(player1, player2, die1, die2))
 
     calculate(player1, player2, die1, die2)
     log_message(player1, player2, die1, die2)
@@ -46,10 +47,7 @@ class RiskCalculator
     if @rolls.any?
       roll = @rolls.pop
 
-      player1 = find_or_add_player(roll.player1_name)
-      player2 = find_or_add_player(roll.player2_name)
-
-      calculate_undo(player1, player2, roll.die1, roll.die2)
+      calculate_undo(roll.player1, roll.player2, roll.die1, roll.die2)
       log_message_undo
     else
       puts "No rolls yet\n"
