@@ -1,8 +1,9 @@
 require 'sinatra/base'
 require 'sass'
 
-require_relative 'risk_calculator'
+require_relative 'models/risk_calculator'
 
+# Parse Sass styles
 class SassHandler < Sinatra::Base
   set :views, File.dirname(__FILE__) + '/views/stylesheets'
 
@@ -12,6 +13,7 @@ class SassHandler < Sinatra::Base
   end
 end
 
+# Parse Javascript styles
 class JavascriptHandler < Sinatra::Base
   set :views, File.dirname(__FILE__) + '/views/scripts'
 
@@ -21,6 +23,7 @@ class JavascriptHandler < Sinatra::Base
   end
 end
 
+# The routes
 class MyApp < Sinatra::Base
   use SassHandler
   use JavascriptHandler
@@ -43,7 +46,7 @@ class MyApp < Sinatra::Base
 
   post '/roll' do
     @calculator = settings.calculator
-    @calculator.runScenario(params[:winner], params[:loser], params[:roll_one], params[:roll_two])
+    @calculator.run_scenario(params[:winner], params[:loser], params[:roll_one], params[:roll_two])
 
     redirect '/'
   end
@@ -57,11 +60,10 @@ class MyApp < Sinatra::Base
 
   post '/random' do
     @calculator = settings.calculator
-    @calculator.randomScenario(4, 200)
+    @calculator.random_scenario(4, 200)
 
     redirect '/'
   end
-
 end
 
 MyApp.run! port: 4567 if $PROGRAM_NAME == __FILE__
