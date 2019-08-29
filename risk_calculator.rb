@@ -14,8 +14,8 @@ class RiskCalculator
     @rng = RandomNameGenerator.new
   end
 
-  def initialize_names(n)
-    n.times { @randomNames.push(@rng.compose) }
+  def initialize_names(amount)
+    amount.times { @randomNames.push(@rng.compose) }
   end
 
   def runScenario(player1_name, player2_name, die1, die2)
