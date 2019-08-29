@@ -52,23 +52,22 @@ class RiskCalculator
       player2 = find_or_add_player(player2_name)
 
       calculate_undo(player1, player2, die1, die2)
-      log_message_undo(player1, player2, die1, die2)
+      log_message_undo
     else
       puts 'No rolls yet'
       puts ''
     end
   end
 
-
   def log_message(player1, player2, num1, num2)
     @log_messages.push("#{player1.name} beat #{player2.name} in a #{num1} to #{num2} roll.")
   end
 
-  def log_message_undo(player1, player2, num1, num2)
+  def log_message_undo
     if !@log_messages.empty?
       @log_messages.pop
     else
-      puts "There are no messages to undo!"
+      puts 'There are no messages to undo!'
     end
   end
 
