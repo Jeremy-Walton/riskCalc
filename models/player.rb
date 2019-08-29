@@ -31,7 +31,7 @@ class Player
   end
 
   def update_ratios
-    @ratio = @wins / @losses.to_f
-    @luck = @luckwins / @lucklosses.to_f
+    @ratio = (@losses.zero? ? @wins.to_f : @wins.to_f / @losses.to_f).round(2)
+    @luck = (@lucklosses.zero? ? @luckwins.to_f : @luckwins.to_f / @lucklosses.to_f).round(2)
   end
 end

@@ -23,10 +23,11 @@ class RiskCalculator
     player1 = find_or_add_player(player1_name)
     player2 = find_or_add_player(player2_name)
 
-    @rolls.push(Roll.new(player1, player2, die1, die2))
+    new_roll = Roll.new(player1, player2, die1, die2)
+    @rolls.push(new_roll)
+    log_message(new_roll)
 
     calculate(player1, player2, die1, die2)
-    log_message(player1, player2, die1, die2)
   end
 
   def calculate(player1, player2, die1, die2)
@@ -54,8 +55,8 @@ class RiskCalculator
     end
   end
 
-  def log_message(player1, player2, num1, num2)
-    @log_messages.push("#{player1.name} beat #{player2.name} in a #{num1} to #{num2} roll.")
+  def log_message(roll)
+    @log_messages.push(roll.to_s)
   end
 
   def log_message_undo

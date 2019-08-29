@@ -39,7 +39,10 @@ class MyApp < Sinatra::Base
   post '/new_player' do
     name = params[:new_name]
     @calculator = settings.calculator
-    @calculator.find_or_add_player(name) if name && name != ''
+
+    if name && name != ''
+      @calculator.find_or_add_player(name)
+    end
 
     redirect '/'
   end

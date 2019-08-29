@@ -8,4 +8,8 @@ class Roll
     @die1 = die1
     @die2 = die2
   end
+
+  def to_s
+    "#{@player1.name} beat #{@player2.name} in a #{@die1} to #{@die2} roll."
+  end
 end
