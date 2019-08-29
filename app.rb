@@ -30,7 +30,6 @@ class MyApp < Sinatra::Base
 
   get '/' do
     @calculator = settings.calculator
-    @calculator.runScenario('Jeremy Josh 3 1')
     slim :index
   end
 
@@ -38,6 +37,7 @@ class MyApp < Sinatra::Base
     name = params[:new_name]
     @calculator = settings.calculator
     @calculator.find_or_add_player(name)
+
     redirect '/'
   end
 
@@ -50,6 +50,7 @@ class MyApp < Sinatra::Base
     puts @rawInput
     @calculator = settings.calculator
     @calculator.runScenario(@rawInput)
+
     redirect '/'
   end
 end
