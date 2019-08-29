@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sass'
+require 'chartkick'
 
 require_relative 'models/risk_calculator'
 

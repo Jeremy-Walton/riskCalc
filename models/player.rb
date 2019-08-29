@@ -1,6 +1,6 @@
 # Player Model
 class Player
-  attr_accessor :name, :ratio, :luck, :wins, :losses, :luckwins, :lucklosses
+  attr_accessor :name, :ratio, :luck, :wins, :losses, :luckwins, :lucklosses, :stats
 
   def initialize(name)
     @name = name
@@ -10,6 +10,7 @@ class Player
     @wins = 0
     @losses = 0
     @ratio = 0
+    @stats = []
   end
 
   def update_win(luck:, undo: false)
@@ -33,5 +34,7 @@ class Player
   def update_ratios
     @ratio = (@losses.zero? ? @wins.to_f : @wins.to_f / @losses.to_f).round(2)
     @luck = (@lucklosses.zero? ? @luckwins.to_f : @luckwins.to_f / @lucklosses.to_f).round(2)
+
+    @stats.push([@stats.length + 1, luck])
   end
 end
