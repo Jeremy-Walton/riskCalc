@@ -58,6 +58,13 @@ class MyApp < Sinatra::Base
     redirect '/'
   end
 
+  post '/random' do
+    @calculator = settings.calculator
+    @calculator.randomScenario(4, 200)
+
+    redirect '/'
+  end
+
 end
 
 MyApp.run! port: 4567 if $PROGRAM_NAME == __FILE__
