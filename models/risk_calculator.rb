@@ -1,5 +1,6 @@
 require 'random_name_generator'
 require_relative 'player'
+require_relative 'roll'
 
 # Risk Calculator
 class RiskCalculator
@@ -19,7 +20,7 @@ class RiskCalculator
   end
 
   def run_scenario(player1_name, player2_name, die1, die2)
-    @rolls.push([player1_name, player2_name, die1, die2])
+    @rolls.push(Roll.new(player1_name, player2_name, die1, die2))
     player1 = find_or_add_player(player1_name)
     player2 = find_or_add_player(player2_name)
 
@@ -42,20 +43,16 @@ class RiskCalculator
   end
 
   def undo_roll
-    if !@rolls.empty?
+    if @rolls.any?
       roll = @rolls.pop
-      player1_name = roll[0]
-      player2_name = roll[1]
-      die1 = roll[2]
-      die2 = roll[3]
-      player1 = find_or_add_player(player1_name)
-      player2 = find_or_add_player(player2_name)
 
-      calculate_undo(player1, player2, die1, die2)
+      player1 = find_or_add_player(roll.player1_name)
+      player2 = find_or_add_player(roll.player2_name)
+
+      calculate_undo(player1, player2, roll.die1, roll.die2)
       log_message_undo
     else
-      puts 'No rolls yet'
-      puts ''
+      puts "No rolls yet\n"
     end
   end
 

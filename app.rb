@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'sass'
 
-require_relative 'risk_calculator'
+require_relative 'models/risk_calculator'
 
 # Parse Sass styles
 class SassHandler < Sinatra::Base
