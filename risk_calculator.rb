@@ -81,7 +81,7 @@ class RiskCalculator
     @players = []
     @randomNames = []
     initialize_names(player_num.to_i)
-    
+
     roll_num.times do
       player1 = find_or_add_player(@randomNames.sample)
       player2 = find_or_add_player(@randomNames.sample)
