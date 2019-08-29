@@ -41,10 +41,10 @@ class Player
 
   def random_message
     case rand(1..4)
-    when 1; 'needs to quit sucking.'
+    when 1; 'needs to get better.'
     when 2; 'should get more luck.'
     when 3; 'should just give up at this point.'
-    else; 'is the big unluck.'
+    else; 'is pretty unlucky'
     end
   end
 

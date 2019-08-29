@@ -1,5 +1,63 @@
-h1 Welcome!
+.container
+  .row
+    .col-md-6
+      .card.panel.mt-4
+        .card-body
+          form action='/new_player' method='post'
+            .form-row.align-items-center.justify-content-center
+              .col-auto
+                input.form-control type='text' name='new_name' placeholder='Name'
+              .col-auto
+                button.btn.btn-info type='submit' Add Player
 
-ul
-  - @calculator.players.each do |player|
-    li #{player.name}
+          form action='/roll' method='post'
+            .row.mt-4
+              .col-md-9
+                .row
+                  .col-md-8
+                    select.form-control.player-dropdown name='winner'
+                      option disabled=true selected=true value='' Winner
+                      - @calculator.players.each do |person|
+                        option = person.name
+                  .col-md-3
+                    select.form-control.number-dropdown name='roll_one'
+                      option 1
+                      option 2
+                      option 3
+                .row.mt-1
+                  .col-md-8
+                    select.form-control.player-dropdown name='loser'
+                      option.hidden value='' Loser
+                      - @calculator.players.each do |person|
+                        option = person.name
+                  .col-md-3
+                    select.form-control.number-dropdown name='roll_two'
+                      option 1
+                      option 2
+                      option 3
+              .row.col-md-3.justify-content-center
+                button.btn.btn-success type="submit" Proccess Roll
+  .row
+    .col-md-12
+      .mt-4.table-wrapper
+        h1.stats.text-center.p-2.m-0 Stats
+        table.table
+          thead
+            tr.text-center.thead-primary
+              th Player
+              th Wins
+              th Losses
+              th Adjusted Wins
+              th Adjusted Losses
+              th Ratio
+              th Adjusted Ratio
+          tbody
+            - @calculator.players.each do |p|
+              tr.text-center
+                td = p.name
+                td = p.wins
+                td = p.losses
+                td = p.luckwins.round(2)
+                td = p.lucklosses.round(2)
+                td = p.ratio.round(2)
+                td = p.luck.round(2)
