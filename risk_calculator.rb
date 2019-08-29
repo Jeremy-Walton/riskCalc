@@ -75,7 +75,7 @@ class RiskCalculator
     @log_messages
   end
 
-  def randomScenario(player_num, roll_num)
+  def random_scenario(player_num, roll_num)
     @players = []
     @random_names = []
     initialize_names(player_num.to_i)
@@ -88,7 +88,7 @@ class RiskCalculator
   end
 
   def find_or_add_player(name)
-    player = @players.find { |player| player.name == name }
+    player = @players.find { |p| p.name == name }
 
     if !player || @players.empty?
       puts "New player (#{name}) added", ''
@@ -96,7 +96,7 @@ class RiskCalculator
       @players.push(player)
     end
 
-    return player
+    player
   end
 
   def sort_players

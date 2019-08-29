@@ -60,7 +60,7 @@ class MyApp < Sinatra::Base
 
   post '/random' do
     @calculator = settings.calculator
-    @calculator.randomScenario(4, 200)
+    @calculator.random_scenario(4, 200)
 
     redirect '/'
   end
