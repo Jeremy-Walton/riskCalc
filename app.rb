@@ -54,7 +54,8 @@ class MyApp < Sinatra::Base
   post '/undo-roll' do
     @calculator = settings.calculator
     @calculator.undo_roll
-    slim :index
+
+    redirect '/'
   end
 
 end
