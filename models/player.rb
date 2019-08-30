@@ -21,7 +21,7 @@ class Player
 
     @wins += win_value
     @luckwins += luck_value
-    update_ratios
+    update_ratios(undo: undo)
   end
 
   def update_loss(luck:, undo: false)
@@ -30,14 +30,14 @@ class Player
 
     @losses += loss_value
     @lucklosses += luck_value
-    update_ratios
+    update_ratios(undo: undo)
   end
 
-  def update_ratios
+  def update_ratios(undo: false)
     @ratio = (@losses.zero? ? @wins.to_f : @wins.to_f / @losses.to_f).round(2)
     @luck = (@lucklosses.zero? ? @luckwins.to_f : @luckwins.to_f / @lucklosses.to_f).round(2)
 
-    @stats.push([@stats.length + 1, luck])
+    undo ? @stats.pop() : @stats.push([@stats.length + 1, @luck])
   end
 
   def rolls_and_wins

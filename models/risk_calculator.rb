@@ -4,10 +4,9 @@ require_relative 'roll'
 
 # Risk Calculator
 class RiskCalculator
-  attr_accessor :game_over, :players
+  attr_accessor :players
 
   def initialize
-    @game_over = false
     @rolls = []
     @players = []
     @random_names = []
@@ -41,6 +40,8 @@ class RiskCalculator
   def calculate_undo(player1, player2, die1, die2)
     luck = (die2.to_f / die1.to_f).round(2)
 
+    player1.one_to_three_wins -= 1  if(die1 == 1 && die2 == 3)
+    player2.three_to_one_losses -= 1  if(die1 == 1 && die2 == 3)
     player1.update_win(luck: luck, undo: true)
     player2.update_loss(luck: luck, undo: true)
   end
@@ -80,7 +81,7 @@ class RiskCalculator
     roll_num.times do
       player1 = find_or_add_player(@random_names.sample)
       player2 = find_or_add_player(@random_names.sample)
-      calculate(player1, player2, rand(1..3), rand(1..3))
+      run_scenario(player1.name, player2.name, rand(1..3), rand(1..3))
     end
   end
 
@@ -98,5 +99,11 @@ class RiskCalculator
 
   def sort_players
     @players.sort_by(&:luck).reverse!
+  end
+
+  def clear
+    @players = []
+    @rolls = []
+    @log_messages = []
   end
 end

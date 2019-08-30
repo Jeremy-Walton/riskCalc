@@ -68,7 +68,14 @@ class MyApp < Sinatra::Base
 
   post '/random' do
     @calculator = settings.calculator
-    @calculator.random_scenario(4, 200)
+    @calculator.random_scenario(params[:players].to_i, params[:rolls].to_i)
+
+    redirect '/calculate'
+  end
+
+  post '/clear' do
+    @calculator = settings.calculator
+    @calculator.clear()
 
     redirect '/calculate'
   end

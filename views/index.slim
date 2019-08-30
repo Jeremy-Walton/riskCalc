@@ -11,7 +11,7 @@
               .col-auto
                 button.btn.btn-info type='submit' Add Player
           form action='/roll' method='post'
-            .row.mt-4
+            .row.mt-3
               .col-md-9
                 .row
                   .col-md-8
@@ -37,12 +37,21 @@
                       option 3
               .row.col-md-3.justify-content-center
                 button.btn.btn-success type="submit" Proccess Roll
+      .card.panel.mt-2
+        .card-body
+          h5.text-center Random Game Generator
           form action="/random" method="post"
-            button.btn.btn-secondary.undo-roll.mt-3 Randomly generate game just because
-            javascript:
-              $('.undo-roll').on('click', function() {
-                return confirm('Are you sure? This will overwrite any progress you have.');
-              });
+            .form-row.align-items-center.justify-content-center
+              .col-3
+                input.form-control type='text' name='players' placeholder='#players'
+              .col-3
+                input.form-control type='text' name='rolls' placeholder='#rolls'
+              .col-5
+                button.btn.btn-secondary.generate Generate Random Game
+                javascript:
+                  $('.generate').on('click', function() {
+                    return confirm('Are you sure? This will overwrite any progress you have.');
+                  });
     .col-md-6
       .card.panel.mt-4
         .card-body
@@ -94,3 +103,10 @@
     .col-md-12
       h5.stats.text-center Total Rolls compared to Wins
       == column_chart( @calculator.players.map { |player| { name: player.name, data: player.rolls_and_wins } } )
+  form action="/clear" method="post"
+    .form-row.align-items-center.justify-content-center.mb-5
+        button.btn.btn-danger.clear-session Clear Session
+        javascript:
+          $('.clear-session').on('click', function() {
+            return confirm('Are you sure? This will overwrite any progress you have.');
+          });

@@ -2,7 +2,7 @@
 
 $black: black;
 $white: white;
-$primary: #4792e39c;
+$primary: #4792e3;
 $input: #007bff;
 $info: #17a2b8;
 $stats: #00e1ff;
@@ -32,7 +32,6 @@ body {
 .panel {
   background-color: $light-purple;
   border-radius: 10px;
-  height: 280px;
 }
 
 .player-dropdown, .player-dropdown:focus {
@@ -82,7 +81,7 @@ body {
   color: $white;
   padding: 10px;
   overflow: auto;
-  height: 150px;
+  height: 204px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
