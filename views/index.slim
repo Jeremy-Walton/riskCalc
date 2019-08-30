@@ -41,7 +41,7 @@
             button.btn.btn-secondary.undo-roll.mt-3 Randomly generate game just because
             javascript:
               $('.undo-roll').on('click', function() {
-                return confirm('Are you sure?');
+                return confirm('Are you sure? This will overwrite any progress you have.');
               });
     .col-md-6
       .card.panel.mt-4
@@ -79,7 +79,7 @@
                 td = p.lucklosses.round(2)
                 td = p.ratio.round(2)
                 td = p.luck.round(2)
-  .row.chart
+  .row.chart.mt-5
     .col-md-12
       h5.stats.text-center Luck vs. Time
       == line_chart( @calculator.players.map { |player| { name: player.name, data: player.stats } } )

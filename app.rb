@@ -31,10 +31,14 @@ class MyApp < Sinatra::Base
 
   set :calculator, RiskCalculator.new
 
-  get '/' do
+  get '/calculate' do
     @calculator = settings.calculator
 
     slim :index
+  end
+
+  get '/' do
+    slim :info
   end
 
   post '/new_player' do
@@ -45,28 +49,28 @@ class MyApp < Sinatra::Base
       @calculator.find_or_add_player(name)
     end
 
-    redirect '/'
+    redirect '/calculate'
   end
 
   post '/roll' do
     @calculator = settings.calculator
     @calculator.run_scenario(params[:winner], params[:loser], params[:roll_one].to_i, params[:roll_two].to_i)
 
-    redirect '/'
+    redirect '/calculate'
   end
 
   post '/undo-roll' do
     @calculator = settings.calculator
     @calculator.undo_roll
 
-    redirect '/'
+    redirect '/calculate'
   end
 
   post '/random' do
     @calculator = settings.calculator
     @calculator.random_scenario(4, 200)
 
-    redirect '/'
+    redirect '/calculate'
   end
 end
 
