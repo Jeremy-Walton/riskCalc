@@ -50,7 +50,7 @@ class MyApp < Sinatra::Base
 
   post '/roll' do
     @calculator = settings.calculator
-    @calculator.run_scenario(params[:winner], params[:loser], params[:roll_one], params[:roll_two])
+    @calculator.run_scenario(params[:winner], params[:loser], params[:roll_one].to_i, params[:roll_two].to_i)
 
     redirect '/'
   end

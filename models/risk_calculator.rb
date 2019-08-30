@@ -22,17 +22,18 @@ class RiskCalculator
   def run_scenario(player1_name, player2_name, die1, die2)
     player1 = find_or_add_player(player1_name)
     player2 = find_or_add_player(player2_name)
-
     new_roll = Roll.new(player1, player2, die1, die2)
     @rolls.push(new_roll)
     log_message(new_roll)
-
+    
     calculate(player1, player2, die1, die2)
   end
-
+  
   def calculate(player1, player2, die1, die2)
     luck = (die2.to_f / die1.to_f).round(2)
-
+    
+    player1.one_to_three_wins += 1  if(die1 == 1 && die2 == 3)
+    player2.three_to_one_losses += 1  if(die1 == 1 && die2 == 3)
     player1.update_win(luck: luck)
     player2.update_loss(luck: luck)
   end

@@ -77,10 +77,13 @@ body {
 
 .list-rolls {
   background-color: $purple;
+  scrollbar-color: $purple;
   color: $white;
   padding: 10px;
-  overflow: scroll;
+  overflow: auto;
   height: 150px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .undo-roll {
@@ -89,7 +92,14 @@ body {
 }
 
 .chart {
-  margin: 30px 0;
-
+  margin: 20px 0;
+  padding: 10px;
+  border-radius: 10px;
   background-color: $white;
+}
+
+.col-md-5 {
+  margin-left: auto;
+  margin-right: auto;
+  float: none !important;
 }
