@@ -2,12 +2,13 @@
 
 $black: black;
 $white: white;
-$primary: #4793e3;
+$primary: #4792e39c;
 $input: #007bff;
 $info: #17a2b8;
 $stats: #00e1ff;
 $table-rows: #8beaff;
 $purple: #9e59ff;
+$light-purple: #aeaeff;
 
 body {
   font-family: Helvetica;
@@ -29,7 +30,7 @@ body {
 // Sticky Footer End
 
 .panel {
-  background-color: #aeaeff;
+  background-color: $light-purple;
   border-radius: 10px;
   height: 280px;
 }
@@ -102,4 +103,43 @@ body {
   margin-left: auto;
   margin-right: auto;
   float: none !important;
+}
+
+.navbar a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+.navbar a:hover {
+  background-color: $light-purple;
+  color: black;
+}
+
+img {
+  float: left;
+  width: 50%;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+h2.h-welcome {
+  background-color: $white;
+  font-family: Arial;
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.welcome {
+  padding: 20px;
+  font-size: 150%;
+  background-color: $white;
+  border-style: solid;
+  border-color: rgb(181, 144, 255);
 }
