@@ -55,15 +55,27 @@
           form action="/random" method="post"
             .form-row.align-items-center.justify-content-center
               .col-3
-                input.form-control type='text' name='players' placeholder='#players'
+                input.form-control type='text' name='players' placeholder='#players' id="players" onchange="enableGenerateButton()"
               .col-3
-                input.form-control type='text' name='rolls' placeholder='#rolls'
+                input.form-control type='text' name='rolls' placeholder='#rolls' id="rolls" onchange="enableGenerateButton()"
               .col-5
-                button.btn.btn-secondary.generate Generate Random Game
+                button.btn.btn-secondary.generate disabled="true" id="generate" Generate Random Game
                 javascript:
                   $('.generate').on('click', function() {
                     return confirm('Are you sure? This will overwrite any progress you have.');
                   });
+
+                  function enableGenerateButton()
+                  {   
+                    var selectelem = document.getElementById('players');
+                    var selectelem1 = document.getElementById('rolls');
+                    var btnelem = document.getElementById('generate');
+                    if (Number.isInteger(parseInt(selectelem.value)))
+                      if (Number.isInteger(parseInt(selectelem1.value)))
+                        btnelem.disabled = false;
+                    else
+                      btnelem.disabled = true;
+                  }
     .col-md-6
       .card.panel.mt-4
         .card-body
