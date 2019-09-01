@@ -15,7 +15,7 @@
               .col-md-9
                 .row
                   .col-md-8
-                    select.form-control.player-dropdown name='winner'
+                    select.form-control.player-dropdown id="winner-dropdown" onchange="enableButton()" name='winner'
                       option disabled=true selected=true value='' Winner
                       - @calculator.players.each do |person|
                         option = person.name
@@ -26,7 +26,7 @@
                       option 3
                 .row.mt-1
                   .col-md-8
-                    select.form-control.player-dropdown name='loser'
+                    select.form-control.player-dropdown id="loser-dropdown" onchange="enableButton()" name='loser'
                       option disabled=true selected=true value='' Loser
                       - @calculator.players.each do |person|
                         option = person.name
@@ -36,7 +36,19 @@
                       option 2
                       option 3
               .row.col-md-3.justify-content-center
-                button.btn.btn-success type="submit" Proccess Roll
+                button.btn.btn-success type="submit" disabled="true" id="process" Process Roll
+                javascript:
+                  function enableButton()
+                  {   
+                    var selectelem = document.getElementById('winner-dropdown');
+                    var selectelem1 = document.getElementById('loser-dropdown');
+                    var btnelem = document.getElementById('process');
+                    if (selectelem = selectelem.value)
+                      if (selectelem1 = selectelem1.value)
+                        btnelem.disabled = false;
+                    else
+                      btnelem.disabled = true;
+                  }
       .card.panel.mt-2
         .card-body
           h5.text-center Random Game Generator
