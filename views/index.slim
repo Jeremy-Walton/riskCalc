@@ -117,7 +117,8 @@
       == column_chart( @calculator.players.map { |player| { name: player.name, data: player.rolls_and_wins } } )
   form action="/clear" method="post"
     .form-row.align-items-center.justify-content-center.mb-5
-        button.btn.btn-danger.clear-session Clear Session
+        button.btn.btn-danger.clear-session Clear Session          
+        a.btn.btn-info.ml-3 role="button" href="/save" method="get" Save Session
         javascript:
           $('.clear-session').on('click', function() {
             return confirm('Are you sure? This will overwrite any progress you have.');

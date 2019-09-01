@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sass'
 require 'chartkick'
+require 'csv'
 
 require_relative 'models/risk_calculator'
 
@@ -39,6 +40,36 @@ class MyApp < Sinatra::Base
 
   get '/' do
     slim :info
+  end
+
+  get '/csv' do 
+    @calculator = settings.calculator
+    content_type 'application/csv'
+    attachment "#{params[:name]}.csv"
+    csv_string = CSV.generate do |csv|
+      @calculator.rolls.each do |roll|
+        csv << [roll.player1.name, roll.player2.name, roll.die1, roll.die2]
+      end
+    end   
+  end
+
+  get '/load' do
+    slim :load
+  end
+
+  get '/save' do
+    slim :save
+  end
+
+  post '/load' do
+    @calculator = settings.calculator
+    content = params['file'][:tempfile].read
+    content_arr = []
+    content.each_line do |line|
+        content_arr << [line]
+    end
+    @calculator.load_game(content_arr)
+    redirect '/calculate'
   end
 
   post '/new_player' do

@@ -18,6 +18,14 @@ class RiskCalculator
     amount.times { @random_names.push(@rng.compose) }
   end
 
+  def load_game(arr)
+    arr.each do |line|
+      line = line[0].split(",")
+      run_scenario(line[0].to_s, line[1].to_s, line[2].to_i, line[3].to_i)
+      puts line
+    end
+  end
+
   def run_scenario(player1_name, player2_name, die1, die2)
     player1 = find_or_add_player(player1_name)
     player2 = find_or_add_player(player2_name)
@@ -71,6 +79,10 @@ class RiskCalculator
 
   def logs
     @log_messages
+  end
+
+  def rolls
+    @rolls
   end
 
   def random_scenario(player_num, roll_num)
