@@ -47,15 +47,15 @@ class MyApp < Sinatra::Base
     slim :info
   end
 
-  get '/csv' do 
+  get '/csv' do
     @calculator = settings.calculator
     content_type 'application/csv'
     attachment "#{params[:name]}.csv"
-    csv_string = CSV.generate do |csv|
+    CSV.generate do |csv|
       @calculator.rolls.each do |roll|
         csv << [roll.player1.name, roll.player2.name, roll.die1, roll.die2]
       end
-    end   
+    end
   end
 
   get '/load' do
