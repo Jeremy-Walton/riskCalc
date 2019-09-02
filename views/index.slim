@@ -127,6 +127,10 @@
     .col-md-12
       h5.stats.text-center Total Rolls compared to Wins
       == column_chart( @calculator.players.map { |player| { name: player.name, data: player.rolls_and_wins } } )
+  .row
+    .col-md-12.chart
+      h5.stats.text-center Win Streaks
+      == bar_chart (@calculator.players.map { |player| [player.name, player.streak]})
   form action="/clear" method="post"
     .form-row.align-items-center.justify-content-center.mb-5
         button.btn.btn-danger.clear-session Clear Session          
