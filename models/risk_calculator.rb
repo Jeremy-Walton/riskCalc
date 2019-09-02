@@ -1,10 +1,11 @@
 require 'random_name_generator'
 require_relative 'player'
 require_relative 'roll'
+require_relative 'stats'
 
 # Risk Calculator
 class RiskCalculator
-  attr_accessor :players, :streak_holder
+  attr_accessor :players
 
   def initialize
     @rolls = []
@@ -12,6 +13,8 @@ class RiskCalculator
     @random_names = []
     @log_messages = []
     @rng = RandomNameGenerator.new
+    @streak_holder
+    @streak_count
   end
 
   def initialize_names(amount)
@@ -27,8 +30,10 @@ class RiskCalculator
 
   def run_scenario(player1_name, player2_name, die1, die2)
     player1 = find_or_add_player(player1_name)
-    streak(player1)
+    player1.stats.update_winner(die1, die2)
     player2 = find_or_add_player(player2_name)
+    player2.stats.update_loser(die1, die2)
+    streak(player1)
     new_roll = Roll.new(player1, player2, die1, die2)
     @rolls.push(new_roll)
     log_message(new_roll)
@@ -39,8 +44,8 @@ class RiskCalculator
   def calculate(player1, player2, die1, die2)
     luck = (die2.to_f / die1.to_f).round(2)
     
-    player1.one_to_three_wins += 1  if(die1 == 1 && die2 == 3)
-    player2.three_to_one_losses += 1  if(die1 == 1 && die2 == 3)
+    player1.stats.one_three += 1  if(die1 == 1 && die2 == 3)
+    player2.stats.three_to_one_losses += 1  if(die1 == 1 && die2 == 3)
     player1.update_win(luck: luck)
     player2.update_loss(luck: luck)
   end
@@ -48,8 +53,8 @@ class RiskCalculator
   def calculate_undo(player1, player2, die1, die2)
     luck = (die2.to_f / die1.to_f).round(2)
     
-    player1.one_to_three_wins -= 1  if(die1 == 1 && die2 == 3)
-    player2.three_to_one_losses -= 1  if(die1 == 1 && die2 == 3)
+    player1.stats.one_three -= 1  if(die1 == 1 && die2 == 3)
+    player2.stats.three_to_one_losses -= 1  if(die1 == 1 && die2 == 3)
     player1.update_win(luck: luck, undo: true)
     player2.update_loss(luck: luck, undo: true)
   end
@@ -84,6 +89,18 @@ class RiskCalculator
   def rolls
     @rolls
   end
+
+  def streak(player)
+    if @streak_holder == player.name
+      player.stats.streak_count += 1
+      if player.stats.streak_count >= player.stats.streak
+        player.stats.streak = player.stats.streak_count + 1
+      end
+    else
+      player.stats.streak_count = 0
+    end
+    @streak_holder = player.name
+  end
   
   def random_scenario(player_num, roll_num)
     @players = []
@@ -99,18 +116,6 @@ class RiskCalculator
       end
     end
   end
-  
-  def streak(player)
-    if @streak_holder == player.name
-      player.streak_count += 1
-      if player.streak_count >= player.streak
-        player.streak = player.streak_count + 1
-      end
-    else
-      player.streak_count = 0
-    end
-    @streak_holder = player.name
-  end
 
   def find_or_add_player(name)
     player = @players.find { |p| p.name == name }
@@ -125,7 +130,7 @@ class RiskCalculator
   end
 
   def sort_players
-    @players.sort_by(&:luck).reverse!
+    @players.sort_by { |player| player.stats.luck}.reverse
   end
 
   def clear

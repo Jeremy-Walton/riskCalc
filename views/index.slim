@@ -77,31 +77,31 @@
             - @calculator.sort_players.each do |p|
               tr.text-center
                 td = p.name
-                td = p.wins
-                td = p.losses
-                td = p.luckwins.round(2)
-                td = p.lucklosses.round(2)
-                td = p.ratio.round(2)
-                td = p.luck.round(2)
+                td = p.stats.wins
+                td = p.stats.losses
+                td = p.stats.luckwins.round(2)
+                td = p.stats.lucklosses.round(2)
+                td = p.stats.ratio.round(2)
+                td = p.stats.luck.round(2)
   .row.chart.mt-5
     .col-md-12
       h5.stats.text-center Luck vs. Time
-      == line_chart( @calculator.players.map { |player| { name: player.name, data: player.stats } } )
+      == line_chart( @calculator.players.map { |player| { name: player.name, data: player.luck_v_time } } )
   .row
     .col-md-5.chart
       h5.stats.text-center 1-3 Wins
-      == pie_chart (@calculator.players.map { |player| [player.name, player.one_to_three_wins]})
+      == pie_chart (@calculator.players.map { |player| [player.name, player.stats.one_three]})
     .col-md-5.chart
       h5.stats.text-center 3-1 losses
-      == pie_chart( @calculator.players.map { |player| [player.name, player.three_to_one_losses]} )
+      == pie_chart( @calculator.players.map { |player| [player.name, player.stats.three_to_one_losses]} )
   .row.chart
     .col-md-12
       h5.stats.text-center Total Rolls compared to Wins
-      == column_chart( @calculator.players.map { |player| { name: player.name, data: player.rolls_and_wins } } )
+      == column_chart( @calculator.players.map { |player| { name: player.name, data: player.stats.rolls_and_wins } } )
   .row
     .col-md-12.chart
       h5.stats.text-center Win Streaks
-      == bar_chart (@calculator.players.map { |player| [player.name, player.streak]})
+      == bar_chart (@calculator.players.map { |player| [player.name, player.stats.streak]})
   form action="/clear" method="post"
     .form-row.align-items-center.justify-content-center.mb-5
         button.btn.btn-danger.confirm Clear Session
