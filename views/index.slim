@@ -11,11 +11,11 @@
               .col-auto
                 button.btn.btn-info type='submit' Add Player
           form action='/roll' method='post'
-            .row.mt-4
+            .row.mt-3
               .col-md-9
                 .row
                   .col-md-8
-                    select.form-control.player-dropdown name='winner'
+                    select.form-control.player-dropdown id="winner-dropdown" onchange="enableButton()" name='winner'
                       option disabled=true selected=true value='' Winner
                       - @calculator.players.each do |person|
                         option = person.name
@@ -26,7 +26,7 @@
                       option 3
                 .row.mt-1
                   .col-md-8
-                    select.form-control.player-dropdown name='loser'
+                    select.form-control.player-dropdown id="loser-dropdown" onchange="enableButton()" name='loser'
                       option disabled=true selected=true value='' Loser
                       - @calculator.players.each do |person|
                         option = person.name
@@ -36,13 +36,46 @@
                       option 2
                       option 3
               .row.col-md-3.justify-content-center
-                button.btn.btn-success type="submit" Proccess Roll
+                button.btn.btn-success type="submit" disabled="true" id="process" Process Roll
+                javascript:
+                  function enableButton()
+                  {   
+                    var selectelem = document.getElementById('winner-dropdown');
+                    var selectelem1 = document.getElementById('loser-dropdown');
+                    var btnelem = document.getElementById('process');
+                    if (selectelem = selectelem.value)
+                      if (selectelem1 = selectelem1.value)
+                        btnelem.disabled = false;
+                    else
+                      btnelem.disabled = true;
+                  }
+      .card.panel.mt-2
+        .card-body
+          h5.text-center Random Game Generator
           form action="/random" method="post"
-            button.btn.btn-secondary.undo-roll.mt-3 Randomly generate game just because
-            javascript:
-              $('.undo-roll').on('click', function() {
-                return confirm('Are you sure?');
-              });
+            .form-row.align-items-center.justify-content-center
+              .col-3
+                input.form-control type='text' name='players' placeholder='#players' id="players" onchange="enableGenerateButton()"
+              .col-3
+                input.form-control type='text' name='rolls' placeholder='#rolls' id="rolls" onchange="enableGenerateButton()"
+              .col-5
+                button.btn.btn-secondary.generate disabled="true" id="generate" Generate Random Game
+                javascript:
+                  $('.generate').on('click', function() {
+                    return confirm('Are you sure? This will overwrite any progress you have.');
+                  });
+
+                  function enableGenerateButton()
+                  {   
+                    var selectelem = document.getElementById('players');
+                    var selectelem1 = document.getElementById('rolls');
+                    var btnelem = document.getElementById('generate');
+                    if (Number.isInteger(parseInt(selectelem.value)))
+                      if (Number.isInteger(parseInt(selectelem1.value)))
+                        btnelem.disabled = false;
+                    else
+                      btnelem.disabled = true;
+                  }
     .col-md-6
       .card.panel.mt-4
         .card-body
@@ -79,7 +112,7 @@
                 td = p.lucklosses.round(2)
                 td = p.ratio.round(2)
                 td = p.luck.round(2)
-  .row.chart
+  .row.chart.mt-5
     .col-md-12
       h5.stats.text-center Luck vs. Time
       == line_chart( @calculator.players.map { |player| { name: player.name, data: player.stats } } )
@@ -94,3 +127,15 @@
     .col-md-12
       h5.stats.text-center Total Rolls compared to Wins
       == column_chart( @calculator.players.map { |player| { name: player.name, data: player.rolls_and_wins } } )
+  .row
+    .col-md-12.chart
+      h5.stats.text-center Win Streaks
+      == bar_chart (@calculator.players.map { |player| [player.name, player.streak]})
+  form action="/clear" method="post"
+    .form-row.align-items-center.justify-content-center.mb-5
+        button.btn.btn-danger.clear-session Clear Session          
+        a.btn.btn-info.ml-3 role="button" href="/save" method="get" Save Session
+        javascript:
+          $('.clear-session').on('click', function() {
+            return confirm('Are you sure? This will overwrite any progress you have.');
+          });
