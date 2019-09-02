@@ -4,7 +4,7 @@ require_relative 'roll'
 
 # Risk Calculator
 class RiskCalculator
-  attr_accessor :players, :streak_holder
+  attr_accessor :players, :streak_holder, :rolls
 
   def initialize
     @rolls = []
@@ -79,10 +79,6 @@ class RiskCalculator
 
   def logs
     @log_messages
-  end
-
-  def rolls
-    @rolls
   end
 
   def random_scenario(player_num, roll_num)

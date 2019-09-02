@@ -43,6 +43,6 @@ class Player
   end
 
   def rolls_and_wins
-    return ["Total Rolls", @stats.length], ["Wins", @wins]
+    [['Total Rolls', @stats.length], ['Wins', @wins]]
   end
 end
