@@ -5,20 +5,18 @@
         .card-body
           h5.card-title.text-center Roll
           form action='/new_player' method='post'
-            .form-row.align-items-center.justify-content-center
-              .col-auto
-                input.form-control type='text' name='new_name' placeholder='Name'
-              .col-auto
-                button.btn.btn-info type='submit' Add Player
+            .d-flex
+              input.form-control.mr-1 type='text' name='new_name' placeholder='Name'
+              button.btn.btn-secondary type='submit' Add Player
           form action='/roll' method='post'
             .row.mt-3
               .col-md-9
                 .row
                   .col-md-8
-                    select.form-control.player-dropdown id="winner-dropdown" onchange="enableButton()" name='winner'
+                    select.form-control.player-dropdown#winner-dropdown name='winner'
                       option disabled=true selected=true value='' Winner
                       - @calculator.players.each do |person|
-                        option = person.name
+                        option value=person.name = person.name
                   .col-md-3
                     select.form-control.number-dropdown name='roll_one'
                       option 1
@@ -26,56 +24,29 @@
                       option 3
                 .row.mt-1
                   .col-md-8
-                    select.form-control.player-dropdown id="loser-dropdown" onchange="enableButton()" name='loser'
+                    select.form-control.player-dropdown#loser-dropdown name='loser'
                       option disabled=true selected=true value='' Loser
                       - @calculator.players.each do |person|
-                        option = person.name
+                        option value=person.name = person.name
                   .col-md-3
                     select.form-control.number-dropdown name='roll_two'
                       option 1
                       option 2
                       option 3
               .row.col-md-3.justify-content-center
-                button.btn.btn-success type="submit" disabled="true" id="process" Process Roll
-                javascript:
-                  function enableButton()
-                  {
-                    var selectelem = document.getElementById('winner-dropdown');
-                    var selectelem1 = document.getElementById('loser-dropdown');
-                    var btnelem = document.getElementById('process');
-                    if (selectelem = selectelem.value)
-                      if (selectelem1 = selectelem1.value)
-                        btnelem.disabled = false;
-                    else
-                      btnelem.disabled = true;
-                  }
+                button.btn.btn-success#process-roll type='submit' disabled=true Process Roll
+
       .card.panel.mt-2
         .card-body
           h5.card-title.text-center Random Game Generator
           form action="/random" method="post"
             .form-row.align-items-center.justify-content-center
               .col-md-3
-                input.form-control type='text' name='players' placeholder='#players' id="players" onchange="enableGenerateButton()"
+                input.form-control.rng-input#players type='text' name='players' placeholder='#players'
               .col-md-3
-                input.form-control type='text' name='rolls' placeholder='#rolls' id="rolls" onchange="enableGenerateButton()"
+                input.form-control.rng-input#rolls type='text' name='rolls' placeholder='#rolls'
               .col-md-5
-                button.btn.btn-secondary.generate disabled="true" id="generate" Generate
-                javascript:
-                  $('.generate').on('click', function() {
-                    return confirm('Are you sure? This will overwrite any progress you have.');
-                  });
-
-                  function enableGenerateButton()
-                  {
-                    var selectelem = document.getElementById('players');
-                    var selectelem1 = document.getElementById('rolls');
-                    var btnelem = document.getElementById('generate');
-                    if (Number.isInteger(parseInt(selectelem.value)))
-                      if (Number.isInteger(parseInt(selectelem1.value)))
-                        btnelem.disabled = false;
-                    else
-                      btnelem.disabled = true;
-                  }
+                button.btn.btn-secondary.confirm#generate disabled="true" Generate
     .col-md-6
       .card.panel.mt-4
         .card-body
@@ -133,9 +104,5 @@
       == bar_chart (@calculator.players.map { |player| [player.name, player.streak]})
   form action="/clear" method="post"
     .form-row.align-items-center.justify-content-center.mb-5
-        button.btn.btn-danger.clear-session Clear Session
+        button.btn.btn-danger.confirm Clear Session
         a.btn.btn-info.ml-3 role="button" href="/save" method="get" Save Session
-        javascript:
-          $('.clear-session').on('click', function() {
-            return confirm('Are you sure? This will overwrite any progress you have.');
-          });
