@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sinatra/reloader'
 require 'sass'
 require 'chartkick'
 require 'csv'
@@ -29,6 +30,10 @@ end
 class MyApp < Sinatra::Base
   use SassHandler
   use JavascriptHandler
+
+  configure :development do
+    register Sinatra::Reloader
+  end
 
   set :calculator, RiskCalculator.new
 

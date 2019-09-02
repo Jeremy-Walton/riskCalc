@@ -11,6 +11,7 @@ gem 'random_name_generator'
 group :development, :test do
   gem 'pry'
   gem 'rubocop-airbnb'
+  gem 'sinatra-contrib'
 end
 
 group :test do
