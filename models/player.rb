@@ -1,6 +1,7 @@
 # Player Model
 class Player
-  attr_accessor :name, :ratio, :luck, :wins, :losses, :luckwins, :lucklosses, :stats, :one_to_three_wins, :three_to_one_losses, :streak_count, :streak
+  attr_accessor :name, :ratio, :luck, :wins, :losses, :luckwins, :lucklosses, :stats,
+                :streak_count, :streak
 
   def initialize(name)
     @name = name
@@ -13,8 +14,6 @@ class Player
     @streak_count = 0
     @streak = 0
     @stats = []
-    @one_to_three_wins = 0
-    @three_to_one_losses = 0
   end
 
   def update_win(luck:, undo: false)

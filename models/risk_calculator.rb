@@ -29,36 +29,29 @@ class RiskCalculator
     player1 = find_or_add_player(player1_name)
     streak(player1)
     player2 = find_or_add_player(player2_name)
+
     new_roll = Roll.new(player1, player2, die1, die2)
     @rolls.push(new_roll)
+
     log_message(new_roll)
-
-    calculate(player1, player2, die1, die2)
+    calculate(new_roll)
   end
 
-  def calculate(player1, player2, die1, die2)
-    luck = (die2.to_f / die1.to_f).round(2)
-
-    player1.one_to_three_wins += 1  if(die1 == 1 && die2 == 3)
-    player2.three_to_one_losses += 1  if(die1 == 1 && die2 == 3)
-    player1.update_win(luck: luck)
-    player2.update_loss(luck: luck)
+  def calculate(roll)
+    roll.player1.update_win(luck: roll.luck)
+    roll.player2.update_loss(luck: roll.luck)
   end
 
-  def calculate_undo(player1, player2, die1, die2)
-    luck = (die2.to_f / die1.to_f).round(2)
-
-    player1.one_to_three_wins -= 1  if(die1 == 1 && die2 == 3)
-    player2.three_to_one_losses -= 1  if(die1 == 1 && die2 == 3)
-    player1.update_win(luck: luck, undo: true)
-    player2.update_loss(luck: luck, undo: true)
+  def calculate_undo(roll)
+    roll.player1.update_win(luck: roll.luck, undo: true)
+    roll.player2.update_loss(luck: roll.luck, undo: true)
   end
 
   def undo_roll
     if @rolls.any?
       roll = @rolls.pop
 
-      calculate_undo(roll.player1, roll.player2, roll.die1, roll.die2)
+      calculate_undo(roll)
       log_message_undo
     else
       puts "No rolls yet\n"
@@ -128,5 +121,14 @@ class RiskCalculator
     @players = []
     @rolls = []
     @log_messages = []
+  end
+
+  # Chart Metrics
+  def one_to_three_wins(player)
+    @rolls.select { |roll| roll.player1 == player && roll.die1 == 1 && roll.die2 == 3 }.count
+  end
+
+  def three_to_one_losses(player)
+    @rolls.select { |roll| roll.player2 == player && roll.die1 == 1 && roll.die2 == 3 }.count
   end
 end
