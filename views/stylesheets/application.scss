@@ -12,8 +12,6 @@ $light-purple: #aeaeff;
 
 body {
   font-family: Helvetica;
-  background: $primary;
-
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -77,17 +75,13 @@ body {
 
 .list-rolls {
   background-color: $purple;
-  scrollbar-color: $purple;
   color: $white;
   padding: 10px;
-  overflow: auto;
+  overflow: scroll;
   height: 204px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 }
 
 .undo-roll {
-  height: 50px; 
   width: 100%;
 }
 
@@ -102,42 +96,4 @@ body {
   margin-left: auto;
   margin-right: auto;
   float: none !important;
-}
-
-.navbar a {
-  float: left;
-  color: #f2f2f2;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  border-radius: 5px;
-}
-
-.navbar a:hover {
-  background-color: $light-purple;
-  color: black;
-}
-
-img {
-  float: left;
-  width: 50%;
-  margin: 20px;
-  border-radius: 10px;
-}
-
-h2.h-welcome {
-  background-color: $white;
-  font-family: Arial;
-  margin: 20px;
-  padding: 20px;
-  text-align: center;
-  border-radius: 20px;
-}
-
-.welcome {
-  padding: 20px;
-  font-size: 150%;
-  background-color: $white;
-  border-style: solid;
-  border-color: rgb(181, 144, 255);
 }

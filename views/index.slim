@@ -39,7 +39,7 @@
                 button.btn.btn-success type="submit" disabled="true" id="process" Process Roll
                 javascript:
                   function enableButton()
-                  {   
+                  {
                     var selectelem = document.getElementById('winner-dropdown');
                     var selectelem1 = document.getElementById('loser-dropdown');
                     var btnelem = document.getElementById('process');
@@ -51,22 +51,22 @@
                   }
       .card.panel.mt-2
         .card-body
-          h5.text-center Random Game Generator
+          h5.card-title.text-center Random Game Generator
           form action="/random" method="post"
             .form-row.align-items-center.justify-content-center
-              .col-3
+              .col-md-3
                 input.form-control type='text' name='players' placeholder='#players' id="players" onchange="enableGenerateButton()"
-              .col-3
+              .col-md-3
                 input.form-control type='text' name='rolls' placeholder='#rolls' id="rolls" onchange="enableGenerateButton()"
-              .col-5
-                button.btn.btn-secondary.generate disabled="true" id="generate" Generate Random Game
+              .col-md-5
+                button.btn.btn-secondary.generate disabled="true" id="generate" Generate
                 javascript:
                   $('.generate').on('click', function() {
                     return confirm('Are you sure? This will overwrite any progress you have.');
                   });
 
                   function enableGenerateButton()
-                  {   
+                  {
                     var selectelem = document.getElementById('players');
                     var selectelem1 = document.getElementById('rolls');
                     var btnelem = document.getElementById('generate');
@@ -87,7 +87,7 @@
                   p = log
                 tr
                   form action="/undo-roll" method="post"
-                    button type="submit" class="btn btn-warning undo-roll" Undo Roll
+                    button.btn.btn-warning.undo-roll.mt-2 type="submit" Undo Roll
   .row
     .col-md-12
       .mt-4.table-wrapper
@@ -133,7 +133,7 @@
       == bar_chart (@calculator.players.map { |player| [player.name, player.streak]})
   form action="/clear" method="post"
     .form-row.align-items-center.justify-content-center.mb-5
-        button.btn.btn-danger.clear-session Clear Session          
+        button.btn.btn-danger.clear-session Clear Session
         a.btn.btn-info.ml-3 role="button" href="/save" method="get" Save Session
         javascript:
           $('.clear-session').on('click', function() {

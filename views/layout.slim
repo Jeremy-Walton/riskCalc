@@ -2,6 +2,8 @@ doctype html
 html
   head
     title Risk Calculator
+    meta name='viewport' content='width=device-width, initial-scale=1'
+
     link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'
     link rel='stylesheet' type='text/css' href='css/application.css'
 
@@ -14,11 +16,21 @@ html
     script src='chartkick.js'
 
   body
-    nav.navbar.navbar-dark.bg-dark
-      a.mr-auto href="/" Risk Calculator
-      a href="/calculate" Calculate Luck
-      a.ml-3 href="/load" Load Game
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+      a.navbar-brand href='/'  Risk Calculator
+      button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
+        span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          - active = request.path_info == '/calculate' ? 'active' : ''
+          li.nav-item class=active
+            a.nav-link href='/calculate' Calculate Luck
+
+          - active = request.path_info == '/load' ? 'active' : ''
+          li.nav-item class=active
+            a.nav-link href='/load' Load Game
+
     .body
       == yield
-    .footer.navbar.navbar-dark.bg-dark
+    .footer.navbar.navbar-dark.bg-primary
       span.navbar-text.p-0 Copyright © 2019 Josh McLeod & Jeremy Walton
