@@ -2,13 +2,18 @@
 
 $black: black;
 $white: white;
-$primary: #4792e3;
-$input: #007bff;
+
+$primary: #2c5a8a;
+$light-primary: #4385cd;
 $info: #17a2b8;
 $stats: #00e1ff;
 $table-rows: #8beaff;
 $purple: #9e59ff;
 $light-purple: #aeaeff;
+
+.bg-primary {
+  background-color: $primary !important;
+}
 
 body {
   font-family: Helvetica;
@@ -28,20 +33,9 @@ body {
 // Sticky Footer End
 
 .panel {
-  background-color: $light-purple;
+  background-color: $light-primary;
+  color: $white;
   border-radius: 10px;
-}
-
-.player-dropdown, .player-dropdown:focus {
-  background-color: $input;
-  border-color: $input;
-  color: $white;
-}
-
-.number-dropdown, .number-dropdown:focus {
-  background-color: $info;
-  border-color: $info;
-  color: $white;
 }
 
 .table-wrapper{
@@ -67,6 +61,11 @@ body {
 
 .thead-primary th {
   background-color: $primary;
+  color: $white;
+}
+
+.table tr:nth-child(even) {
+  color: $white;
 }
 
 .table tr:nth-child(odd) {

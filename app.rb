@@ -16,20 +16,9 @@ class SassHandler < Sinatra::Base
   end
 end
 
-# Parse Javascript styles
-class JavascriptHandler < Sinatra::Base
-  set :views, File.dirname(__FILE__) + '/views/scripts'
-
-  get "/js/*.js" do
-    filename = params[:splat].first
-    javascript filename.to_sym
-  end
-end
-
 # The routes
 class MyApp < Sinatra::Base
   use SassHandler
-  use JavascriptHandler
 
   configure :development do
     register Sinatra::Reloader
