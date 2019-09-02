@@ -90,10 +90,13 @@ class RiskCalculator
     @random_names = []
     initialize_names(player_num.to_i)
     
-    roll_num.times do
+    while roll_num > 0
       player1 = find_or_add_player(@random_names.sample)
       player2 = find_or_add_player(@random_names.sample)
-      run_scenario(player1.name, player2.name, rand(1..3), rand(1..3))
+      if player1.name != player2.name
+        run_scenario(player1.name, player2.name, rand(1..3), rand(1..3))
+        roll_num -= 1
+      end
     end
   end
   
