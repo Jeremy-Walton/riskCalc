@@ -1,29 +1,15 @@
-require 'sinatra/base'
+require 'sinatra'
+require 'active_record'
+require 'sinatra/activerecord'
 require 'sinatra/reloader'
-require 'sass'
+
 require 'chartkick'
 require 'csv'
 
 require_relative 'models/risk_calculator'
 
-# Parse Sass styles
-class SassHandler < Sinatra::Base
-  set :views, File.dirname(__FILE__) + '/views/stylesheets'
-
-  get '/css/*.css' do
-    filename = params[:splat].first
-    scss filename.to_sym
-  end
-end
-
 # The routes
-class MyApp < Sinatra::Base
-  use SassHandler
-
-  configure :development do
-    register Sinatra::Reloader
-  end
-
+class App < Sinatra::Base
   set :calculator, RiskCalculator.new
 
   get '/calculate' do
@@ -60,7 +46,7 @@ class MyApp < Sinatra::Base
     content = params['file'][:tempfile].read
     content_arr = []
     content.each_line do |line|
-        content_arr << [line]
+      content_arr << [line]
     end
     @calculator.load_game(content_arr)
     redirect '/calculate'
@@ -105,5 +91,3 @@ class MyApp < Sinatra::Base
     redirect '/calculate'
   end
 end
-
-MyApp.run! port: 4567 if $PROGRAM_NAME == __FILE__

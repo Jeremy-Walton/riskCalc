@@ -1,0 +1,11 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: risk_calculator_development
+  pool: 5
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: risk_calculator_production
+  pool: 5

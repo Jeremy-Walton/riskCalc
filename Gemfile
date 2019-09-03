@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'sassc' # css preprocessor
+gem 'pg', '0.18' # postgres database
+gem 'sass' # css preprocessor
 gem 'sinatra' # ruby server
+gem 'activerecord', '5.1.0'
+gem 'sinatra-activerecord'
+gem 'rake' # to apply migrations
 gem 'slim' # html templating language
 gem 'thin' # ruby server engine
 
