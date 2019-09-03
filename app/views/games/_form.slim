@@ -1,0 +1,9 @@
+.container
+  = form_with model: @game, class: 'mt-4' do |f|
+    .form-group
+      = f.label :name
+      = f.text_field :name, class: 'form-control', placeholder: 'Enter Name'
+
+    .text-right
+      = link_to 'Cancel', games_path, class: 'btn btn-secondary mr-1'
+      = f.submit 'Save', class: 'btn btn-success'

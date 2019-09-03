@@ -15,14 +15,18 @@ html
         span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          - active = request.path_info == '/calculate' ? 'active' : ''
-          li.nav-item class=active
-            a.nav-link href='/calculate' Calculate Luck
+          li.nav-item class=current_class?(games_path)
+            = link_to 'Games', games_path, class: 'nav-link'
+          / - active = request.path_info == '/calculate' ? 'active' : ''
+          / li.nav-item class=active
+          /   a.nav-link href='/calculate' Calculate Luck
 
-          - active = request.path_info == '/load' ? 'active' : ''
-          li.nav-item class=active
-            a.nav-link href='/load' Load Game
+          / - active = request.path_info == '/load' ? 'active' : ''
+          / li.nav-item class=active
+          /   a.nav-link href='/load' Load Game
     .body
+      - flash.each do |key, value|
+        .alert class="alert-#{key}" = value
       = yield
     .footer.navbar.navbar-dark.bg-primary
       span.navbar-text.p-0 Copyright © 2019 Josh McLeod & Jeremy Walton

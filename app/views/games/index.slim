@@ -1,0 +1,8 @@
+.container
+  h1.display-6 Games
+
+  = link_to 'New Game', new_game_path, class: 'btn btn-primary'
+
+  ul
+    - @games.each do |game|
+      li = game.name
