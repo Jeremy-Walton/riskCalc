@@ -1,7 +1,5 @@
-require './app'
-require 'sass/plugin/rack'
+# This file is used by Rack-based servers to start the application.
 
-Sass::Plugin.options[:style] = :compressed
-use Sass::Plugin::Rack
+require_relative 'config/environment'
 
-Rack::Handler.default.run(App, Port: 4567)
+run Rails.application
