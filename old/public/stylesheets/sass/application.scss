@@ -1,4 +1,4 @@
-@import './normalize.css';
+// @import './normalize.css';
 
 $black: black;
 $white: white;
@@ -15,22 +15,22 @@ $light-purple: #aeaeff;
   background-color: $primary !important;
 }
 
-body {
-  font-family: Helvetica;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+// body {
+//   font-family: Helvetica;
+//   display: flex;
+//   flex-direction: column;
+//   min-height: 100vh;
+// }
 
-// Sticky Footer
-.body {
-  flex: 1;
-}
+// // Sticky Footer
+// .body {
+//   flex: 1;
+// }
 
-.footer {
-  font-size: 0.8rem;
-}
-// Sticky Footer End
+// .footer {
+//   font-size: 0.8rem;
+// }
+// // Sticky Footer End
 
 .panel {
   background-color: $light-primary;

@@ -14,4 +14,23 @@
  *= require_self
  */
 
- @import 'bootstrap';
+@import 'normalize.css';
+@import 'bootstrap';
+
+
+body {
+  font-family: Helvetica;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// Sticky Footer
+.body {
+  flex: 1;
+}
+
+.footer {
+  font-size: 0.8rem;
+}
+// Sticky Footer End
