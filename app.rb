@@ -6,7 +6,8 @@ require 'sinatra/reloader'
 require 'chartkick'
 require 'csv'
 
-require_relative 'models/risk_calculator'
+current_dir = Dir.pwd
+Dir["#{current_dir}/models/*.rb"].each { |file| require file }
 
 # The routes
 class App < Sinatra::Base
@@ -14,6 +15,7 @@ class App < Sinatra::Base
 
   get '/calculate' do
     @calculator = settings.calculator
+    @players = Player.all
 
     slim :index
   end
@@ -53,21 +55,26 @@ class App < Sinatra::Base
   end
 
   post '/new_player' do
-    name = params[:new_name]
     @calculator = settings.calculator
 
-    if name && name != ''
-      @calculator.find_or_add_player(name)
-    end
+    player = Player.create(name: params[:new_name])
+    player.save
 
     redirect '/calculate'
   end
 
   post '/roll' do
     @calculator = settings.calculator
-    @calculator.run_scenario(params[:winner], params[:loser], params[:roll_one].to_i, params[:roll_two].to_i)
 
-    redirect '/calculate'
+    roll = Roll.create(risk_calculator_id: 1, winner_id: params[:winner], loser_id: params[:loser], roll1: params[:roll_one], roll2: params[:roll_two])
+
+    if roll.save
+      @calculator.run_scenario(params[:winner], params[:loser], params[:roll_one].to_i, params[:roll_two].to_i)
+      redirect '/calculate'
+    else
+      redirect '/calculate'
+    end
+
   end
 
   post '/undo-roll' do

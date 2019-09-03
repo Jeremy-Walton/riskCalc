@@ -1,19 +1,23 @@
 # Player Model
-class Player
-  attr_accessor :name, :ratio, :luck, :wins, :losses, :luckwins, :lucklosses, :stats,
-                :streak_count, :streak
+class Player < ActiveRecord::Base
+  validates :name, presence: true
+  # attr_accessor :name, :ratio, :luck, :wins, :losses, :luckwins, :lucklosses, :streak_count, :streak
 
-  def initialize(name)
-    @name = name
-    @luck = 0
-    @luckwins = 0
-    @lucklosses = 0
-    @wins = 0
-    @losses = 0
-    @ratio = 0
-    @streak_count = 0
-    @streak = 0
-    @stats = []
+  # def initialize(name)
+  #   @name = name
+  #   @luck = 0
+  #   @luckwins = 0
+  #   @lucklosses = 0
+  #   @wins = 0
+  #   @losses = 0
+  #   @ratio = 0
+  #   @streak_count = 0
+  #   @streak = 0
+  #   @stats = []
+  # end
+
+  def stats
+    @stats ||= []
   end
 
   def update_win(luck:, undo: false)

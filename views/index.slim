@@ -15,7 +15,7 @@
                   .col-md-8
                     select.form-control.player-dropdown#winner-dropdown name='winner'
                       option disabled=true selected=true value='' Winner
-                      - @calculator.players.each do |person|
+                      - @players.each do |person|
                         option value=person.name = person.name
                   .col-md-3
                     select.form-control.number-dropdown name='roll_one'
@@ -26,7 +26,7 @@
                   .col-md-8
                     select.form-control.player-dropdown#loser-dropdown name='loser'
                       option disabled=true selected=true value='' Loser
-                      - @calculator.players.each do |person|
+                      - @players.each do |person|
                         option value=person.name = person.name
                   .col-md-3
                     select.form-control.number-dropdown name='roll_two'
